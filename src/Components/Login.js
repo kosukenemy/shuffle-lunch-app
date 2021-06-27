@@ -11,23 +11,29 @@ const Login = () => {
             : window.localStorage.getItem("login")
         );
     const [matchUserData ,setMatchUserData ] = useState([]);
-    const [loginData , setLoginData] = useState([]);
+    const [loginData] = useState([]);
+    const [loginState , SetLoginState ] = useState(
+        window.localStorage.getItem("loginState") ? false : true
+    );
 
     useEffect(() => {
         const FetchAPI = async() => {
             setMatchUserData( await fetchUserlist(username) );
         }
         FetchAPI();
-    },[username , name ])
+    },[username])
 
-    useEffect(() => { } , [loginData])
 
     const saveToLocalStorage = () => {
         window.localStorage.setItem("login", name);
+        window.localStorage.setItem("loginState", loginState);
+        console.log(window.localStorage.setItem("loginState", loginState))
     };
+    console.log(loginState)
 
     function clearLocalStorage() {
         window.localStorage.clear();
+        window.location.reload();
     }
     
 
@@ -35,7 +41,7 @@ const Login = () => {
         e.preventDefault();
         // ユーザー検索
         if(matchUserData.map(m => (m.username)).includes(name)) {
-            
+            SetLoginState(!loginState)
             const val = JSON.stringify(name)
             console.log(name , 'がログインになりました' , 'ストリング', val);
 
@@ -43,34 +49,43 @@ const Login = () => {
             
         } else {
             alert('ユーザー名はありません')
+            SetLoginState(loginState)
         }       
     }
 
-    // 入力されたキーワードからインデックス番号を取得
-    const i =  matchUserData.findIndex(({username}) => username === name);
-    loginData.push(matchUserData[i]);
-    console.log(loginData)
+    if(!loginState) {
+        // 入力されたキーワードからインデックス番号を取得
+        const i =  matchUserData.findIndex(({username}) => username === name);
+        loginData.push(matchUserData[i]);
+    } else {;}
+
 
     return (
         <div>
             <div className="login">
-                <form className="login_form" onSubmit={ (e) => handleSubmit(e) }>
-                    <h1>Login Here!</h1>
-                    <input id="username" type="name" placeholder="Name" value={name} onChange={ (e) => setName(e.target.value) } />
-                    <button type="submit" >Login</button>
-                </form>
-                {name}さん　こんにちは
-                <button onClick={clearLocalStorage}>ログアウト</button>
-
-                <h2>ユーザー情報</h2>
-                {/* ログアウト時にFalseにする必要がある。 */}
-                {loginData.slice(1,2).map(user => (
-                    <div key={user.id}>
-                        名前：{user.username}
-                        email:{user.email}<br/>
-                        自己紹介: {user.introduction}
+                {loginState &&
+                    <form className="login_form" onSubmit={ (e) => handleSubmit(e) }>
+                        <h1>Login Here!</h1>
+                        <input id="username" type="name" placeholder="Name" value={name} onChange={ (e) => setName(e.target.value) } />
+                        <button type="submit" >Login</button>
+                    </form>
+                }
+                {!loginState &&  <><button onClick={clearLocalStorage}>ログアウト</button> {name}さん　こんにちは  </> }
+                
+                {!loginState &&
+                    <div>
+                        <h2>ユーザー情報</h2>
+                    {/* ログアウト時にFalseにする必要がある。 */}
+                    {loginData.slice(1,2).map(user => (
+                        <div key={user.id}>
+                            名前：{user.username}
+                            email:{user.email}<br/>
+                            自己紹介: {user.introduction}
+                        </div>
+                    ))}
+                    true
                     </div>
-                ))}
+                }
             </div>
         </div>
     )
