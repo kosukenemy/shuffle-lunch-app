@@ -10,6 +10,9 @@ const Login = () => {
             ? ""
             : window.localStorage.getItem("login")
         );
+    // ログイン方法 email / password
+    const [inputEmail, setInputEmail] = useState("");
+    const [inputpassword ,setInputpassword] = useState("")
     const [matchUserData ,setMatchUserData ] = useState([]);
     const [loginData] = useState([]);
     const [loginState , SetLoginState ] = useState(
@@ -31,7 +34,11 @@ const Login = () => {
     };
     console.log(loginState)
 
-    function clearLocalStorage() {
+
+    const handleLogOut = () => {
+        let clear = "";
+        setInputEmail(clear);
+        setInputpassword(clear);
         window.localStorage.clear();
         window.location.reload();
     }
@@ -40,13 +47,22 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // ユーザー検索
-        if(matchUserData.map(m => (m.username)).includes(name)) {
+/*         if(matchUserData.map(m => (m.username)).includes(name)) {
             SetLoginState(!loginState)
             const val = JSON.stringify(name)
             console.log(name , 'がログインになりました' , 'ストリング', val);
 
             saveToLocalStorage();
             
+        }  */
+        // submitされた時にjsonからユーザ情報を検索
+        if(matchUserData.map(m => (m.email)).includes(inputEmail)) {
+            if(matchUserData.map(m => (m.password)).includes(inputpassword)) {
+                SetLoginState(!loginState)
+                saveToLocalStorage();
+            }
+
+                
         } else {
             alert('ユーザー名はありません')
             SetLoginState(loginState)
@@ -54,8 +70,8 @@ const Login = () => {
     }
 
     if(!loginState) {
-        // 入力されたキーワードからインデックス番号を取得
-        const i =  matchUserData.findIndex(({username}) => username === name);
+        // 入力されたemailからインデックス番号を取得
+        const i =  matchUserData.findIndex(({email}) => email === inputEmail);
         loginData.push(matchUserData[i]);
     } else {;}
 
@@ -65,17 +81,18 @@ const Login = () => {
             <div className="login">
                 {loginState &&
                     <form className="login_form" onSubmit={ (e) => handleSubmit(e) }>
-                        <h1>Login Here!</h1>
-                        <input id="username" type="name" placeholder="Name" value={name} onChange={ (e) => setName(e.target.value) } />
+                        <h1>Login </h1>                        
+                        <input type="email" placeholder="email" value={inputEmail} onChange={ (e) => setInputEmail(e.target.value) } />
+                        <input type="password" placeholder="password" value={inputpassword} onChange={ (e) => setInputpassword(e.target.value) } />
                         <button type="submit" >Login</button>
                     </form>
                 }
-                {!loginState &&  <><button onClick={clearLocalStorage}>ログアウト</button> {name}さん　こんにちは  </> }
+                {!loginState &&  <><button onClick={handleLogOut}>ログアウト</button> {name}さん　こんにちは  </> }
                 
                 {!loginState &&
                     <div>
                         <h2>ユーザー情報</h2>
-                    {/* ログアウト時にFalseにする必要がある。 */}
+                    {/* ログアウト時にfalse */}
                     {loginData.slice(1,2).map(user => (
                         <div key={user.id}>
                             名前：{user.username}
