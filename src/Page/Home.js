@@ -1,9 +1,15 @@
 import React , { useState, useEffect } from 'react';
 import { fetchUserlist } from '../API/API';
+import { GlobalStyle, LoginArea,  LoginField, BasicButton, GradationType1 } from '../Style/Style'
 import Userlist from '../Page/Userlist'
 
-const Home = () => {
+/* ---------
+マテリアルUI
+-----------*/
 
+
+
+const Home = () => {
 
     // ログイン方法 email / password
     const [inputEmail, setInputEmail] = useState("");
@@ -66,15 +72,17 @@ const Home = () => {
 
 
     return (
-        <div>
+        <div style={{position:'relative'}}>
+            <GlobalStyle />
             {/* ログイン画面 ----------------------------------------*/}
             {loginState &&
-                <form className="login_form" onSubmit={ (e) => handleSubmitToLogin(e) }>
-                    <h1>Login </h1>                        
-                    <input type="email" placeholder="email" value={inputEmail} onChange={ (e) => setInputEmail(e.target.value) } />
-                    <input type="password" placeholder="password" value={inputpassword} onChange={ (e) => setInputpassword(e.target.value) } />
-                    <button type="submit" >Login</button>
-                </form>
+                <LoginArea className="login_form" onSubmit={ (e) => handleSubmitToLogin(e) }>
+                    <h1 className="login-title">ログイン</h1>                      
+                    <LoginField type="email" placeholder="メールアドレス" value={inputEmail} onChange={ (e) => setInputEmail(e.target.value) } />
+                    <LoginField type="password" placeholder="パスワード" value={inputpassword} onChange={ (e) => setInputpassword(e.target.value) } />
+                    <BasicButton style={GradationType1} type="submit">ログイン</BasicButton>
+                    <a className="new-account" href="#">新規登録はこちら</a>
+                </LoginArea>
             }
             
 
