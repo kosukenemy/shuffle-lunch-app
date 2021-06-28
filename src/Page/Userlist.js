@@ -12,7 +12,7 @@ const Userlist = () => {
         }
         FetchAPI();
     },[])
-    /* console.log(userlist) */
+    console.log(userlist)
 
     return (
         <div>
@@ -20,7 +20,7 @@ const Userlist = () => {
                 <div key={user.id}>
                     <Link to={`userPage/${user.id}`}>
                     <div>
-                        {/* <img src={user.poster} alt={user.username} /> */}
+                        <img src={user.poster} alt={user.username} />
                         <p>{user.username}</p>
                     </div>
                     </Link>
