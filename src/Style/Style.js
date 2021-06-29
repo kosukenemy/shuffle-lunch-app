@@ -58,9 +58,9 @@ export const GradationType1 = {
 }
 
 
-/* -----------
-    ログイン
-------------- */
+/* ----------------------
+    ログイン周り コンポーネント
+------------------------ */
 
 export const LoginArea = styled.form`
     width: 600px;
@@ -91,6 +91,22 @@ export const BasicButton = styled.button`
     margin: 0 auto;
     text-align: center;
     display: block;
-    padding: 10px 5px;
+    padding: 10px 5px; 
+`;
 
+export const LogOutButton = styled(BasicButton)`
+    width: 110px;
+    margin:0;
+`;
+
+/* ----------------------
+    ダッシュボード コンポーネント
+------------------------ */
+
+export const UserIcon = styled.img`
+
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
 `;

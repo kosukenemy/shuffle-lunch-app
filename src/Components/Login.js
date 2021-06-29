@@ -16,7 +16,7 @@ const Login = () => {
     const [matchUserData ,setMatchUserData ] = useState([]);
 
     // email / passwordにマッチしたユーザーデータ
-    const [loginData] = useState([]);
+    const [loginData] = useState();
 
     // ユーザーのログイン状態のステート,ステートはlocalストレージに保存
     const [loginState , SetLoginState ] = useState(

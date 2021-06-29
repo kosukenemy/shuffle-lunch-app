@@ -1,30 +1,31 @@
 import React , { useState, useEffect } from 'react';
 import { fetchUserlist } from '../API/API';
-import { GlobalStyle, LoginArea,  LoginField, BasicButton, GradationType1 } from '../Style/Style'
+import { GlobalStyle, LoginArea,  LoginField, BasicButton, GradationType1, LogOutButton , UserIcon } from '../Style/Style'
 import Userlist from '../Page/Userlist'
 
-/* ---------
-マテリアルUI
------------*/
 
 
 
 const Home = () => {
 
     // ログイン方法 email / password
-    const [inputEmail, setInputEmail] = useState("");
+    const [inputEmail, setInputEmail] = useState(
+        window.localStorage.getItem("mail") == null
+        ? ""
+        : window.localStorage.getItem("mail")
+    );
     const [inputpassword ,setInputpassword] = useState("");
 
     // fetchUserlistを呼んで返す
     const [matchUserData ,setMatchUserData ] = useState([]);
 
-    // email / passwordにマッチしたユーザーデータ
-    const [loginData] = useState([]);
-
     // ユーザーのログイン状態のステート,ステートはlocalストレージに保存
     const [loginState , SetLoginState ] = useState(
         window.localStorage.getItem("loginState") ? false : true
     );
+    console.log(loginState)
+
+
 
     useEffect(() => {
         const FetchAPI = async() => {
@@ -36,6 +37,8 @@ const Home = () => {
 
     const saveToLocalStorage = () => {
         window.localStorage.setItem("loginState", loginState);
+        window.localStorage.setItem("mail", inputEmail);
+
     };
 
     const handleLogOut = () => {
@@ -44,11 +47,13 @@ const Home = () => {
         setInputpassword(clear);
         window.localStorage.clear();
         window.location.reload();
+        
     }
     
 
     const handleSubmitToLogin = (e) => {
         e.preventDefault();
+
         // submitされたe-mailとpasswordでjsonからユーザ情報を検索
         if(matchUserData.map(m => (m.email)).includes(inputEmail)) {
             if(matchUserData.map(m => (m.password)).includes(inputpassword)) {
@@ -63,11 +68,21 @@ const Home = () => {
         }       
     }
 
+
+    const idx = [];    
+
     if(!loginState) {
-        // 入力されたemailからインデックス番号を取得
-        const i =  matchUserData.findIndex(({email}) => email === inputEmail);
-        loginData.push(matchUserData[i]);
-    } else {;}
+        matchUserData.map((v,k) => v.email === inputEmail ? idx.push(k) :[])
+        console.log(matchUserData[idx]);
+        window.localStorage.setItem("key" , idx);
+        console.log(idx)
+
+    } else {
+
+    }
+    
+    
+
     
 
 
@@ -81,7 +96,6 @@ const Home = () => {
                     <LoginField type="email" placeholder="メールアドレス" value={inputEmail} onChange={ (e) => setInputEmail(e.target.value) } />
                     <LoginField type="password" placeholder="パスワード" value={inputpassword} onChange={ (e) => setInputpassword(e.target.value) } />
                     <BasicButton style={GradationType1} type="submit">ログイン</BasicButton>
-                    <a className="new-account" href="#">新規登録はこちら</a>
                 </LoginArea>
             }
             
@@ -91,7 +105,7 @@ const Home = () => {
                 <div className="App-container">
 
                     {/* SideMenu*/}
-                    <nav className="sideMenu">
+{/*                     <nav className="sideMenu">
                             <div className="header">logo</div>
                             <ul className="menu">
                                 <li>ダッシュボード</li>
@@ -99,22 +113,27 @@ const Home = () => {
                                 <li>フィード</li>
                                 <li>設定</li>
                             </ul>
-                    </nav>
+                    </nav> */}
                     {/* SideMenu*/}
 
                     {/* main*/}
                     <main className="main">
                         <div className="user">
-                            <button onClick={handleLogOut}>ログアウト</button>
+                            <LogOutButton style={GradationType1} onClick={handleLogOut}>ログアウト</LogOutButton>
                             <div>
-                            {loginData.slice(1,2).map(user => (
+                            {matchUserData.map(user => (
                                 <div key={user.id}>
-                                    {user.username}
+                                    
+                                    <div className="icon">
+                                        <UserIcon src={user.poster} alt={user.username}  />
+                                        <span>{user.username}</span>
+                                    </div>
                                 </div>
                             ))}
                             </div>
                         </div>
                         コンテンツ
+                        <div id="out"></div>
                     </main>
                     {/* main*/}
                 </div>

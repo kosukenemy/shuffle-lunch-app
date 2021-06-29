@@ -3,6 +3,7 @@ import { BrowserRouter as Router , Switch, Route } from 'react-router-dom';
 import Home from './Page/Home';
 import UserPage from './Page/UserPage';
 
+import Login from './Components/Login'
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/userPage/:id" component={UserPage} />
+{/*             <Login /> */}
         </Switch>
       </Router>
 
