@@ -23,7 +23,6 @@ const Home = () => {
     const [loginState , SetLoginState ] = useState(
         window.localStorage.getItem("loginState") ? false : true
     );
-    console.log(loginState)
 
 
 
@@ -45,6 +44,7 @@ const Home = () => {
         let clear = "";
         setInputEmail(clear);
         setInputpassword(clear);
+        window.localStorage.setItem("key" , clear);
         window.localStorage.clear();
         window.location.reload();
         
@@ -69,23 +69,33 @@ const Home = () => {
     }
 
 
-    const idx = [];    
+    const idx = [];
+
 
     if(!loginState) {
+        
         matchUserData.map((v,k) => v.email === inputEmail ? idx.push(k) :[])
-        console.log(matchUserData[idx]);
         window.localStorage.setItem("key" , idx);
-        console.log(idx)
+        console.log(matchUserData[idx] , idx);
+        console.log( matchUserData.filter((v,k) => v.email === inputEmail ) )
 
     } else {
 
     }
-    
-    
+
+    const loginUserInfo = matchUserData.filter((v,k) => v.email === inputEmail ).map((u,i) => {
+        return (
+            <div key={u.id}>
+                <div className="icon">
+                    <UserIcon src={u.poster} alt={u.username}  />
+                    <span>{u.username}</span>
+                </div>
+            </div>
+        )
+    })
+
 
     
-
-
     return (
         <div style={{position:'relative'}}>
             <GlobalStyle />
@@ -121,19 +131,12 @@ const Home = () => {
                         <div className="user">
                             <LogOutButton style={GradationType1} onClick={handleLogOut}>ログアウト</LogOutButton>
                             <div>
-                            {matchUserData.map(user => (
-                                <div key={user.id}>
-                                    
-                                    <div className="icon">
-                                        <UserIcon src={user.poster} alt={user.username}  />
-                                        <span>{user.username}</span>
-                                    </div>
-                                </div>
-                            ))}
+                                {loginUserInfo}
                             </div>
+                            <p id="out">
+                            </p>
                         </div>
-                        コンテンツ
-                        <div id="out"></div>
+
                     </main>
                     {/* main*/}
                 </div>
