@@ -33,20 +33,25 @@ const Home = () => {
         FetchAPI();
     },[])
 
+    // ユーザーのメールアドレスをセッション管理に使うが、ユニークIDに変換する関数を実行
+    function getUniqueStr(myStrong){
+        var strong = 1000;
+        if (myStrong) strong = myStrong;
+        return new Date().getTime().toString(16)  + Math.floor(strong*Math.random()).toString(16)
+    }
+    const uniqueID =　getUniqueStr(inputEmail);
 
     const saveToLocalStorage = () => {
         window.sessionStorage.setItem("loginState", loginState);
-        window.sessionStorage.setItem("mail", inputEmail);
-
+        window.sessionStorage.setItem("unique", uniqueID);
     };
 
     const handleLogOut = () => {
         let clear = "";
         setInputEmail(clear);
         setInputpassword(clear);
-        window.sessionStorage.setItem("key" , clear);
         window.sessionStorage.setItem("loginState", clear);
-        window.sessionStorage.setItem("mail", clear);
+        window.sessionStorage.setItem("unique", clear);
         window.location.reload();
         
     }
@@ -55,7 +60,7 @@ const Home = () => {
     const handleSubmitToLogin = (e) => {
         e.preventDefault();
 
-        // submitされたe-mailとpasswordでjsonからユーザ情報を検索
+        // submitされたe-mailとpasswordでjsonからユーザ情報を検索して、Trueならログイン
         if(matchUserData.map(m => (m.email)).includes(inputEmail)) {
             if(matchUserData.map(m => (m.password)).includes(inputpassword)) {
                 SetLoginState(!loginState)
@@ -70,33 +75,6 @@ const Home = () => {
     }
 
 
-    const idx = [];
-
-
-    if(!loginState) {
-        
-        matchUserData.map((v,k) => v.email === inputEmail ? idx.push(k) :[])
-        window.sessionStorage.setItem("key" , idx);
-        console.log(matchUserData[idx] , idx);
-        console.log( matchUserData.filter((v,k) => v.email === inputEmail ) )
-
-    } else {
-
-    }
-
-    const loginUserInfo = matchUserData.filter((v,k) => v.email === inputEmail ).map((u,i) => {
-        return (
-            <div key={u.id}>
-                <div className="icon">
-                    <UserIcon src={u.poster} alt={u.username}  />
-                    <span>{u.username}</span>
-                </div>
-            </div>
-        )
-    })
-
-
-    
     return (
         <div style={{position:'relative'}}>
             <GlobalStyle />
@@ -132,10 +110,15 @@ const Home = () => {
                         <div className="user">
                             <LogOutButton style={GradationType1} onClick={handleLogOut}>ログアウト</LogOutButton>
                             <div>
-                                {loginUserInfo}
+                                {matchUserData.filter(this_user => this_user.email === inputEmail).map(u => (
+                                    <div key={u.id}>
+                                        <div className="icon">
+                                            <UserIcon src={u.poster} alt={u.username}  />
+                                            <span>{u.username}</span>
+                                        </div>
+                                    </div>
+                                ) )}
                             </div>
-                            <p id="out">
-                            </p>
                         </div>
 
                     </main>
