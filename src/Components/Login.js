@@ -3,11 +3,11 @@ import { fetchUserlist } from '../API/API';
 
 const Login = () => {
 
-    const [name ,setName] = useState(
+/*     const [name ,setName] = useState(
         window.localStorage.getItem("login") == null
             ? ""
             : window.localStorage.getItem("login")
-        );
+        ); */
     // ログイン方法 email / password
     const [inputEmail, setInputEmail] = useState("");
     const [inputpassword ,setInputpassword] = useState("");
@@ -32,7 +32,7 @@ const Login = () => {
 
 
     const saveToLocalStorage = () => {
-        window.localStorage.setItem("login", name);
+/*         window.localStorage.setItem("login", name); */
         window.localStorage.setItem("loginState", loginState);
     };
 
@@ -88,7 +88,7 @@ const Login = () => {
                         <button type="submit" >Login</button>
                     </form>
                 }
-                {!loginState &&  <><button onClick={handleLogOut}>ログアウト</button> {name}さん　こんにちは  </> }
+{/*                 {!loginState &&  <><button onClick={handleLogOut}>ログアウト</button> {name}さん　こんにちは  </> } */}
                 
                 {!loginState &&
                     <div>

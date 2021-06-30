@@ -10,9 +10,9 @@ const Home = () => {
 
     // ログイン方法 email / password
     const [inputEmail, setInputEmail] = useState(
-        window.localStorage.getItem("mail") == null
+        window.sessionStorage.getItem("mail") == null
         ? ""
-        : window.localStorage.getItem("mail")
+        : window.sessionStorage.getItem("mail")
     );
     const [inputpassword ,setInputpassword] = useState("");
 
@@ -21,7 +21,7 @@ const Home = () => {
 
     // ユーザーのログイン状態のステート,ステートはlocalストレージに保存
     const [loginState , SetLoginState ] = useState(
-        window.localStorage.getItem("loginState") ? false : true
+        window.sessionStorage.getItem("loginState") ? false : true
     );
 
 
@@ -35,8 +35,8 @@ const Home = () => {
 
 
     const saveToLocalStorage = () => {
-        window.localStorage.setItem("loginState", loginState);
-        window.localStorage.setItem("mail", inputEmail);
+        window.sessionStorage.setItem("loginState", loginState);
+        window.sessionStorage.setItem("mail", inputEmail);
 
     };
 
@@ -44,8 +44,9 @@ const Home = () => {
         let clear = "";
         setInputEmail(clear);
         setInputpassword(clear);
-        window.localStorage.setItem("key" , clear);
-        window.localStorage.clear();
+        window.sessionStorage.setItem("key" , clear);
+        window.sessionStorage.setItem("loginState", clear);
+        window.sessionStorage.setItem("mail", clear);
         window.location.reload();
         
     }
@@ -75,7 +76,7 @@ const Home = () => {
     if(!loginState) {
         
         matchUserData.map((v,k) => v.email === inputEmail ? idx.push(k) :[])
-        window.localStorage.setItem("key" , idx);
+        window.sessionStorage.setItem("key" , idx);
         console.log(matchUserData[idx] , idx);
         console.log( matchUserData.filter((v,k) => v.email === inputEmail ) )
 
