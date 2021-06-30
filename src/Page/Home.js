@@ -1,7 +1,7 @@
 import React , { useState, useEffect } from 'react';
 import { fetchUserlist } from '../API/API';
-import { GlobalStyle, LoginArea,  LoginField, BasicButton, GradationType1, LogOutButton , UserIcon } from '../Style/Style'
-import Userlist from '../Page/Userlist'
+import { GlobalStyle, LoginArea,  LoginField, BasicButton, GradationType1, LogOutButton , HeaderLogo, HomeContainer, SideMenu, MainInner, MainInNavbar, User, UserIcon , UserName } from '../Style/Style'
+import Main from '../Page/Main';
 
 
 
@@ -33,17 +33,19 @@ const Home = () => {
         FetchAPI();
     },[])
 
-    // ユーザーのメールアドレスをセッション管理に使うが、ユニークIDに変換する関数を実行
     function getUniqueStr(myStrong){
         var strong = 1000;
         if (myStrong) strong = myStrong;
         return new Date().getTime().toString(16)  + Math.floor(strong*Math.random()).toString(16)
     }
-    const uniqueID =　getUniqueStr(inputEmail);
+
 
     const saveToLocalStorage = () => {
+        const uniqueID =　getUniqueStr(inputEmail);
+        window.location.reload();
         window.sessionStorage.setItem("loginState", loginState);
-        window.sessionStorage.setItem("unique", uniqueID);
+        window.sessionStorage.setItem("mail", inputEmail);
+
     };
 
     const handleLogOut = () => {
@@ -51,7 +53,7 @@ const Home = () => {
         setInputEmail(clear);
         setInputpassword(clear);
         window.sessionStorage.setItem("loginState", clear);
-        window.sessionStorage.setItem("unique", clear);
+        window.sessionStorage.setItem("mail", clear);
         window.location.reload();
         
     }
@@ -75,6 +77,7 @@ const Home = () => {
     }
 
 
+
     return (
         <div style={{position:'relative'}}>
             <GlobalStyle />
@@ -91,39 +94,39 @@ const Home = () => {
 
             {/* ログイン後 ----------------------------------------*/}
             {!loginState &&
-                <div className="App-container">
+                <HomeContainer>
 
                     {/* SideMenu*/}
-{/*                     <nav className="sideMenu">
-                            <div className="header">logo</div>
+                    <SideMenu>
+                            <HeaderLogo>logo</HeaderLogo>
                             <ul className="menu">
                                 <li>ダッシュボード</li>
                                 <li>ユーザー一覧</li>
                                 <li>フィード</li>
                                 <li>設定</li>
                             </ul>
-                    </nav> */}
+                    </SideMenu>
                     {/* SideMenu*/}
 
                     {/* main*/}
-                    <main className="main">
-                        <div className="user">
-                            <LogOutButton style={GradationType1} onClick={handleLogOut}>ログアウト</LogOutButton>
-                            <div>
+                    <MainInner>
+                        <MainInNavbar>  
                                 {matchUserData.filter(this_user => this_user.email === inputEmail).map(u => (
                                     <div key={u.id}>
-                                        <div className="icon">
+                                        <User>
                                             <UserIcon src={u.poster} alt={u.username}  />
-                                            <span>{u.username}</span>
-                                        </div>
+                                            <UserName>{u.username}</UserName>
+                                        </User>
                                     </div>
                                 ) )}
-                            </div>
+                            <LogOutButton style={GradationType1} onClick={handleLogOut}>ログアウト</LogOutButton>
+                        </MainInNavbar>
+                        <div className="area">
+                            <Main />
                         </div>
-
-                    </main>
+                    </MainInner>
                     {/* main*/}
-                </div>
+                </HomeContainer>
             }
         </div>
     )

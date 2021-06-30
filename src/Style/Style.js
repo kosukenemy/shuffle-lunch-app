@@ -42,7 +42,8 @@ export const GlobalStyle = createGlobalStyle`
     img {
         width: 100%;
     }
-    p,a,h1,h2,h3,span { 
+    li { list-style: none; }
+    ul,p,a,h1,h2,h3,span { 
         text-decoration: none;
         margin: 0;
         padding: 0;
@@ -102,11 +103,63 @@ export const LogOutButton = styled(BasicButton)`
 /* ----------------------
     ダッシュボード コンポーネント
 ------------------------ */
+export const HeaderLogo = styled.div`
+    padding: 10px 30px;
+    height: 50px;
+    font-size: 30px;
+`;
+
+export const HomeContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    min-width: 800px;
+
+`;
+
+export const SideMenu = styled.nav`
+    width: 20%;
+
+`;
+
+export const MainInner = styled.nav`
+    width: 80%;
+
+`;
+
+export const MainInNavbar = styled.nav`
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 0 auto;
+    padding: 10px 30px;
+`;
+
+/* ----------------------
+    ダッシュボード ：　ユーザー
+------------------------ */
+
+export const User = styled.div`
+    display: flex;
+    align-items: center;
+`;
 
 export const UserIcon = styled.img`
 
     border-radius: 50%;
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
+    pointer-events: none;
+`;
+
+
+export const UserName = styled.span`
+    color: #334;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 600;
+    padding: 0 15px;
+
+    &:hover { text-decoration:underline; cursor: pointer; }
 `;
