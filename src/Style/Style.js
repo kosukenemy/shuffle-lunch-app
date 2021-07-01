@@ -39,6 +39,7 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         appearance: none;
     }
+    a { color:#333;}
     img {
         width: 100%;
     }
@@ -48,6 +49,7 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
     }
+    ul { height:90vh;}
 `;
 /* -----------
     テーマ
@@ -105,19 +107,39 @@ export const LogOutButton = styled(BasicButton)`
 ------------------------ */
 export const HeaderLogo = styled.div`
     padding: 10px 30px;
-    height: 50px;
+    height: 55px;
     font-size: 30px;
+    border-bottom: solid 2px #e7e7e7;
 `;
 
 export const HomeContainer = styled.div`
     display: flex;
     justify-content: space-between;
     min-width: 800px;
-
+    background: transparent;
 `;
 
 export const SideMenu = styled.nav`
     width: 20%;
+    border-right: solid 1px #e7e7e7;
+    background: transparent;
+`;
+
+export const MenuBar = styled.ul`
+
+    li {
+        padding: 20px 30px;
+        font-size: 14px;
+        opacity: 0.8;
+        font-weight: 600;
+        cursor: pointer;
+
+        &:hover {
+            transition: all .3s ease;
+            opacity: 1;
+            transform:translateX(8px);
+        }
+    }
 
 `;
 
@@ -127,12 +149,18 @@ export const MainInner = styled.nav`
 `;
 
 export const MainInNavbar = styled.nav`
-    width: 300px;
+    width: 100%;
+    max-width: 360px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0 0 0 auto;
     padding: 10px 30px;
+`;
+
+export const MainArea = styled.div`
+    border-top:solid 1px #e7e7e7;
+    padding: 20px;
 `;
 
 /* ----------------------
@@ -151,15 +179,26 @@ export const UserIcon = styled.img`
     height: 50px;
     object-fit: cover;
     pointer-events: none;
+    border: solid 1px #5563;
+    padding: 2px;
 `;
 
 
 export const UserName = styled.span`
     color: #334;
     font-size: 14px;
-    text-align: center;
+    text-align: left;
     font-weight: 600;
     padding: 0 15px;
+    .name { display:block;}
+    .team {
+        display: inline-block;
+        font-size: 10px;
+        color:#3334;
+    }
 
     &:hover { text-decoration:underline; cursor: pointer; }
 `;
+
+
+
