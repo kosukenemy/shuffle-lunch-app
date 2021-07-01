@@ -7,16 +7,20 @@ import Home from './Page/Home';
 import UserPage from './Page/UserPage';
 import MyPage from './Page/MyPage';
 
-
+export const FetchUser = React.createContext();
 
 function App() {
 
-      // ログイン方法 email / password
-      const [inputEmail, setInputEmail] = useState(
-        window.sessionStorage.getItem("mail") == null
-        ? ""
-        : window.sessionStorage.getItem("mail")
+    // ログイン方法 email / password
+    const [inputEmail, setInputEmail] = useState(
+      window.sessionStorage.getItem("mail") == null
+      ? ""
+      : window.sessionStorage.getItem("mail")
     );
+    
+    // context
+    const loginUserValue = [inputEmail, setInputEmail];
+
     const [inputpassword ,setInputpassword] = useState("");
 
     // fetchUserlistを呼んで返す
@@ -83,67 +87,67 @@ function App() {
     <>
     <Router>
     <Switch>
-      <>
-      <div style={{position:'relative'}}>
-      <GlobalStyle />
-        {/* ログイン画面 ----------------------------------------*/}
-        {loginState &&
-            <LoginArea className="login_form" onSubmit={ (e) => handleSubmitToLogin(e) }>
-                <h1 className="login-title">ログイン</h1>                      
-                <LoginField type="email" placeholder="メールアドレス" value={inputEmail} onChange={ (e) => setInputEmail(e.target.value) } />
-                <LoginField type="password" placeholder="パスワード" value={inputpassword} onChange={ (e) => setInputpassword(e.target.value) } />
-                <BasicButton style={GradationType1} type="submit">ログイン</BasicButton>
-            </LoginArea>
-        }
-      
+      <FetchUser.Provider value={loginUserValue}>
+        <div style={{position:'relative'}}>
+        <GlobalStyle />
+          {/* ログイン画面 ----------------------------------------*/}
+            {loginState &&
+                <LoginArea className="login_form" onSubmit={ (e) => handleSubmitToLogin(e) }>
+                    <h1 className="login-title">ログイン</h1>                      
+                    <LoginField type="email" placeholder="メールアドレス" value={inputEmail} onChange={ (e) => setInputEmail(e.target.value) } />
+                    <LoginField type="password" placeholder="パスワード" value={inputpassword} onChange={ (e) => setInputpassword(e.target.value) } />
+                    <BasicButton style={GradationType1} type="submit">ログイン</BasicButton>
+                </LoginArea>
+            }
 
-        {/* ログイン後 ----------------------------------------*/}
-        {!loginState &&
-            <HomeContainer>
 
-                {/* SideMenu*/}
-                <SideMenu>
-                        <HeaderLogo>logo</HeaderLogo>
-                        <MenuBar>
-                            <li>ダッシュボード</li>
-                            <Link to="/myPage"><li>マイページ</li></Link>
-                            <li>ユーザー一覧</li>
-                            <li>フィード</li>
-                            <li>設定</li>
-                        </MenuBar>
-                </SideMenu>
-                {/* SideMenu*/}
+          {/* ログイン後 ----------------------------------------*/}
+            {!loginState &&
+                <HomeContainer>
 
-                {/* main*/}
-                <MainInner>
-                    <MainInNavbar>  
-                            {matchUserData.filter(this_user => this_user.email === inputEmail).map(u => (
-                                <div key={u.id}>
-                                    <User>
-                                        <UserIcon src={u.poster} alt={u.username}  />
-                                        <UserName>
-                                          <span className="team">{u.team}</span>
-                                          <span className="name">{u.username}</span>
-                                        </UserName>
-                                    </User>
-                                </div>
-                            ) )}
-                        <LogOutButton style={GradationType1} onClick={handleLogOut}>ログアウト</LogOutButton>
-                    </MainInNavbar>
+                    {/* SideMenu*/}
+                    <SideMenu>
+                            <HeaderLogo>logo</HeaderLogo>
+                            <MenuBar>
+                                <li>ダッシュボード</li>
+                                <Link to="/myPage"><li>マイページ</li></Link>
+                                <li>ユーザー一覧</li>
+                                <li>フィード</li>
+                                <li>設定</li>
+                            </MenuBar>
+                    </SideMenu>
+                    {/* SideMenu*/}
 
-                    {/* component*/}
-                    <MainArea>
-                      <Route exact path="/" component={Home} />
-                      <Route path="/userPage/:id" component={UserPage} />
-                      <Route path="/myPage" component={MyPage} />
-                    </MainArea>
+                    {/* main*/}
+                    <MainInner>
+                        <MainInNavbar>  
+                                {matchUserData.filter(this_user => this_user.email === inputEmail).map(u => (
+                                    <div key={u.id}>
+                                        <User>
+                                            <UserIcon src={u.poster} alt={u.username}  />
+                                            <UserName>
+                                              <span className="team">{u.team}</span>
+                                              <span className="name">{u.username}</span>
+                                            </UserName>
+                                        </User>
+                                    </div>
+                                ) )}
+                            <LogOutButton style={GradationType1} onClick={handleLogOut}>ログアウト</LogOutButton>
+                        </MainInNavbar>
 
-                </MainInner>
-                {/* main*/}
-            </HomeContainer>
-        }
-      </div>
-      </>
+                        {/* component*/}
+                        <MainArea>
+                          <Route exact path="/" component={Home} />
+                          <Route path="/userPage/:id" component={UserPage} />
+                          <Route path="/myPage" component={MyPage} />
+                        </MainArea>
+
+                    </MainInner>
+                    {/* main*/}
+                </HomeContainer>
+            }
+        </div>
+      </FetchUser.Provider>
     </Switch>
     </Router>
     </>
