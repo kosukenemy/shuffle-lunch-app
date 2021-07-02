@@ -31,6 +31,7 @@ function App() {
         window.sessionStorage.getItem("loginState") ? false : true
     );
 
+    const getUniqueUser = matchUserData.filter(this_user => this_user.email === inputEmail).map(m => m);
 
 
     useEffect(() => {
@@ -87,7 +88,7 @@ function App() {
     <>
     <Router>
     <Switch>
-      <FetchUser.Provider value={loginUserValue}>
+      <FetchUser.Provider value={getUniqueUser}>
         <div style={{position:'relative'}}>
         <GlobalStyle />
           {/* ログイン画面 ----------------------------------------*/}
