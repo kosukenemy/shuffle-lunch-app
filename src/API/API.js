@@ -1,7 +1,7 @@
 import axios from 'axios';
 const API = process.env.REACT_APP_BASEAPI
 const GET_API_KEY = process.env.REACT_APP_GET_API_KEY
-/* const POST_API_KEY = process.env.REACT_APP_POST_API_KEY */
+const POST_API_KEY = process.env.REACT_APP_POST_API_KEY
 
 
 /* --------
