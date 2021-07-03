@@ -16,7 +16,7 @@ const Userlist = () => {
 
     return (
         <div>
-            {userlist.map((user) => (
+{/*             {userlist.map((user) => (
                 <div key={user.id}>
                     <Link to={`userPage/${user.id}`}>
                     <div>
@@ -25,7 +25,7 @@ const Userlist = () => {
                     </div>
                     </Link>
                 </div>
-            ))}
+            ))} */}
         </div>
     )
 }

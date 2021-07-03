@@ -13,7 +13,6 @@ const UserPage = () => {
         FetchMatchAPI();
     },[id])
 
-    console.log(userDetail)
 
     return (
         <div>
