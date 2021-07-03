@@ -5,28 +5,21 @@ const POST_API_KEY = process.env.REACT_APP_POST_API_KEY
 
 const MyPage = () => {
 
-    const thisUser = useContext(FetchUser);
-    const [fetchUserData , setFetchUserData] = useState([{}]);
-    const [contentEdit , setContentEdit] = useState(false);
 
+    const thisUser = useContext(FetchUser);
+    const [fetchUserData , setFetchUserData] = useState([]);
+    const [contentEdit , setContentEdit] = useState(false);
+    const inu = JSON.parse(JSON.stringify(fetchUserData.slice(0 ,1).map( m => m.username)));
 
     const [editName , setEditName] = useState("");
     const [editAge , setEditAge] = useState("");
     const [editTeam , setEditTeam] = useState("");
     const [editIntroduction , setEditIntroduction] = useState("");
 
-
-
-
     const patchData = {
         "username" : editName,
         "age" : editAge
     }
-
-
-
-    
-
 
     const handleEditSubmit = (e) => {
         e.preventDefault();
@@ -35,10 +28,18 @@ const MyPage = () => {
     }
     
 
-    useEffect(() => {
-        setFetchUserData(thisUser.concat(fetchUserData));
 
+    useEffect(() => {
+        setFetchUserData(thisUser);
+        const v_name = thisUser.filter(m => m.username).map( d => d.username)
+        console.log( v_name )
+    
+
+        setEditName(v_name[0])
     },[thisUser])
+
+
+
 
 
     const getID = fetchUserData.slice(0,1).map(m => m.id);
@@ -72,12 +73,12 @@ const MyPage = () => {
             </div>
             
 
-            {!contentEdit ? (
+            {!contentEdit ? 
                 
                 <div>
                     <button onClick={() => setContentEdit(!contentEdit)}>編集する</button>
 
-                    {fetchUserData.slice(0 ,1).map(((n , idx) => (
+                    {fetchUserData.slice(0 ,1).map(((n , idx) => 
                         <div key={idx}>
                             <div>
                                 {/* <img src={n.poster} alt={n.username} /> */}
@@ -95,10 +96,10 @@ const MyPage = () => {
                                 <p>{n.introduction}</p>
                             </div>
                         </div>
-                )))}
+                ))}
 
                 </div>
-            ) : (
+             : 
 
                 <div>
 
@@ -123,7 +124,7 @@ const MyPage = () => {
                         </form>
                     )))}
                 </div>
-            )}
+            }
 
 
 

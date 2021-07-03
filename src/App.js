@@ -32,6 +32,7 @@ function App() {
     );
 
     const getUniqueStr = matchUserData.filter(this_user => this_user.email === inputEmail).map(m => m);
+    console.log(matchUserData)
 
 
     useEffect(() => {
