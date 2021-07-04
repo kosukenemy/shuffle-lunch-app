@@ -9,7 +9,6 @@ const MyPage = () => {
     const thisUser = useContext(FetchUser);
     const [fetchUserData , setFetchUserData] = useState([]);
     const [contentEdit , setContentEdit] = useState(false);
-    const inu = JSON.parse(JSON.stringify(fetchUserData.slice(0 ,1).map( m => m.username)));
 
     const [editName , setEditName] = useState("");
     const [editAge , setEditAge] = useState("");
@@ -18,24 +17,31 @@ const MyPage = () => {
 
     const patchData = {
         "username" : editName,
-        "age" : editAge
+        "age" : editAge,
+        "team" : editTeam,
+        "introduction" : editIntroduction
     }
 
     const handleEditSubmit = (e) => {
         e.preventDefault();
         setContentEdit(!contentEdit)
-        console.log(patchData)
+        EditedData();
+        window.location.reload();
     }
     
 
 
     useEffect(() => {
         setFetchUserData(thisUser);
-        const v_name = thisUser.filter(m => m.username).map( d => d.username)
-        console.log( v_name )
-    
+        const v_name = thisUser.filter(m => m.username).map( d => d.username);
+        const v_age = thisUser.filter(m => m.age).map( d => d.age);
+        const v_team = thisUser.filter(m => m.team).map( d => d.team);
+        const v_introduction = thisUser.filter(m => m.introduction).map( d => d.introduction);
 
-        setEditName(v_name[0])
+        setEditName(v_name[0]);
+        setEditAge(v_age[0]);
+        setEditTeam(v_team[0]);
+        setEditIntroduction(v_introduction[0]);
     },[thisUser])
 
 
@@ -43,24 +49,17 @@ const MyPage = () => {
 
 
     const getID = fetchUserData.slice(0,1).map(m => m.id);
-    /* console.log(JSON.stringify(getID)) */
 
-    /* console.log( `${API}/userlist/${getID}` ) */
-
-    useEffect(() => {
-        const EditedData = () => {
-            fetch(`${API}/userlist/${getID}` , {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-WRITE-API-KEY": POST_API_KEY
-                },
-                body: JSON.stringify({"username" : "名前を修正3 "})
-            })
-        }
-        /* EditedData(); */
-    },[])
-
+    const EditedData = () => {
+        fetch(`${API}/userlist/${getID}` , {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "X-WRITE-API-KEY": POST_API_KEY
+            },
+            body: JSON.stringify(patchData)
+        })
+    }
 
 
 
@@ -115,11 +114,11 @@ const MyPage = () => {
                         名前
                         <input type="text" value={editName} onChange={ (e) => setEditName(e.target.value) } />
                         年齢
-                        <input type="text" value={editAge || n.age} onChange={ (e) => setEditAge(e.target.value) } />
+                        <input type="text" value={editAge} onChange={ (e) => setEditAge(e.target.value) } />
                         所属
-                        <input type="text" value={editTeam || n.team} onChange={ (e) => setEditTeam(e.target.value) } />
+                        <input type="text" value={editTeam} onChange={ (e) => setEditTeam(e.target.value) } />
                         自己紹介
-                        <input type="text" value={editIntroduction || n.introduction} onChange={ (e) => setEditIntroduction(e.target.value) } />
+                        <input type="text" value={editIntroduction} onChange={ (e) => setEditIntroduction(e.target.value) } />
                         <button onClick={handleEditSubmit} type="submit">保存</button>
                         </form>
                     )))}

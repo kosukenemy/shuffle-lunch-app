@@ -17,9 +17,6 @@ function App() {
       ? ""
       : window.sessionStorage.getItem("mail")
     );
-    
-    // context
-    const loginUserValue = [inputEmail, setInputEmail];
 
     const [inputpassword ,setInputpassword] = useState("");
 
