@@ -28,6 +28,7 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         font-family: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
+        background: #FFFDFD;
     }
     input {
         outline: none;
@@ -95,6 +96,7 @@ export const BasicButton = styled.button`
     text-align: center;
     display: block;
     padding: 10px 5px; 
+    font-weight: 600;
 `;
 
 export const LogOutButton = styled(BasicButton)`
@@ -109,18 +111,17 @@ export const HeaderLogo = styled.div`
     padding: 10px 30px;
     height: 55px;
     font-size: 30px;
-    border-bottom: solid 2px #e7e7e7;
 `;
 
 export const HomeContainer = styled.div`
+    width: 100%;
     display: flex;
-    justify-content: space-between;
     min-width: 800px;
     background: transparent;
 `;
 
 export const SideMenu = styled.nav`
-    width: 20%;
+    width: 15%;
     border-right: solid 1px #e7e7e7;
     background: transparent;
 `;
@@ -143,9 +144,8 @@ export const MenuBar = styled.ul`
 
 `;
 
-export const MainInner = styled.nav`
-    width: 80%;
-
+export const MainInner = styled.div`
+    width: 85%;
 `;
 
 export const MainInNavbar = styled.nav`
@@ -160,7 +160,9 @@ export const MainInNavbar = styled.nav`
 
 export const MainArea = styled.div`
     border-top:solid 1px #e7e7e7;
-    padding: 20px;
+    padding: 20px 30px;
+    background: #F5F5F5;
+    height: 100%;
 `;
 
 /* ----------------------
@@ -201,4 +203,61 @@ export const UserName = styled.span`
 `;
 
 
+export const PageTitle = styled.h2`
+    font-size: 26px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    margin: 40px auto 20px;
+`;
 
+export const EditButton = styled(BasicButton)`
+    width: 110px;
+    margin:0 0 0 auto;
+`;
+
+/* ----------------------
+    マイページ
+------------------------ */
+
+export const MyPageUserIcon = styled(UserIcon)`
+    width: 100px;
+    height: 100px;
+    margin: 0;
+`;
+
+export const PageInnerWrapper = styled.div`
+    background: #fff;
+    border: solid 1px #e7e7e7;
+    padding:30px;
+`;
+
+export const PageRow = styled.div`
+    padding: 0px 60px;
+    padding-right: 0px;
+`;
+
+export const PageColumn = styled.div`
+    display: flex;
+`;
+
+export const PageContentInner = styled.div`
+    margin:0 auto 30px;
+`;
+
+export const PagePrimaryText = styled.p`
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    font-weight: 600;
+    color: rgb(91, 134, 229); /* #616161 */
+    margin: 0 auto 10px;
+`;
+
+export const PagePrimaryContent = styled.p`
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    font-weight: 600;
+    margin: 0 auto 10px;
+    white-space: pre-wrap;
+`;

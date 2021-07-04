@@ -125,8 +125,8 @@ function App() {
                                         <User>
                                             <UserIcon src={u.poster} alt={u.username}  />
                                             <UserName>
-                                              <span className="team">{u.team}</span>
-                                              <span className="name">{u.username}</span>
+                                                <span className="team">{u.team}</span>
+                                                <span className="name">{u.username}</span>
                                             </UserName>
                                         </User>
                                     </div>
@@ -136,9 +136,9 @@ function App() {
 
                         {/* component*/}
                         <MainArea>
-                          <Route exact path="/" component={Home} />
-                          <Route path="/userPage/:id" component={UserPage} />
-                          <Route path="/myPage" component={MyPage} />
+                        <Route exact path="/" component={Home} />
+                        <Route path="/userPage/:id" component={UserPage} />
+                        <Route path="/myPage" component={MyPage} />
                         </MainArea>
 
                     </MainInner>
@@ -146,7 +146,7 @@ function App() {
                 </HomeContainer>
             }
         </div>
-      </FetchUser.Provider>
+        </FetchUser.Provider>
     </Switch>
     </Router>
     </>
