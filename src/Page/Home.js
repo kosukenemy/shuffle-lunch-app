@@ -6,8 +6,9 @@ import Userlist from '../Page/Userlist';
 const Home = () => {
     return (
         <div>
-                OO
+                
                 <Userlist />
+                
         </div>
     )
 }

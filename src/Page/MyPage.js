@@ -104,10 +104,12 @@ const MyPage = () => {
                                     <PagePrimaryText>本日のランチへの参加</PagePrimaryText>
                                     <PagePrimaryContent>{n.lunchState}</PagePrimaryContent>
                                 </PageContentInner>
+
                                 <PageContentInner>
-                                    <PagePrimaryText>食べたいご飯のジャンル</PagePrimaryText>
-                                    <PagePrimaryContent>{n.lunchGenre}</PagePrimaryContent>
+                                        <PagePrimaryText>食べたいご飯のジャンル</PagePrimaryText>
+                                        <PagePrimaryContent>{n.lunchGenre}</PagePrimaryContent>
                                 </PageContentInner>
+                                
                                 <PageContentInner>
                                     <PagePrimaryText>名前 / ニックネーム</PagePrimaryText>
                                     <PagePrimaryContent>{n.username}</PagePrimaryContent>

@@ -207,7 +207,7 @@ export const PageTitle = styled.h2`
     font-size: 26px;
     line-height: 1;
     letter-spacing: 0.02em;
-    margin: 40px auto 20px;
+    margin: 0px auto 20px;
 `;
 
 export const EditButton = styled(BasicButton)`
