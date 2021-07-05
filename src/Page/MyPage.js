@@ -18,8 +18,6 @@ const MyPage = () => {
     const [lunchJoin , setLunchJoin] = useState("参加");
     const [lunchGenre , setLunchGenre] = useState("和食");
 
-    const trueState = "参加";
-    const falseState = "不参加";
 
     const patchData = {
         "lunchState" : lunchJoin,
@@ -75,11 +73,6 @@ const MyPage = () => {
         })
     }
 
-
-    const handleJoin = (e) => { 
-        console.log(lunchJoin)
-        setLunchJoin( e.target.value )
-    }
 
 
 
@@ -144,8 +137,8 @@ const MyPage = () => {
 
                         <div>
                             <label>
-                                <input type="radio" value="参加" onChange={ handleJoin}　checked={lunchJoin === trueState} />参加
-                                <input type="radio" value="不参加" onChange={ handleJoin}　checked={lunchJoin === falseState} />不参加
+                                <input type="radio" value="参加" onChange={ e => setLunchJoin( e.target.value )}　checked={lunchJoin === "参加"} />参加
+                                <input type="radio" value="不参加" onChange={ e => setLunchJoin( e.target.value )}　checked={lunchJoin === "不参加"} />不参加
                             </label>
 
                             <select value={lunchGenre} onChange={ (e) => setLunchGenre( e.target.value )}>
