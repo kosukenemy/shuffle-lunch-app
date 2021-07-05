@@ -22,6 +22,8 @@ export const fetchUserlist = async() => {
             poster : m['profile_images'].url,
             age : m['age'],
             introduction : m['introduction'],
+            lunchState : m['lunchState'],
+            lunchGenre : m['lunchGenre'],
             email: m['email'],
             password : m['password']
         }))
