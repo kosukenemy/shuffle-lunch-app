@@ -85,7 +85,7 @@ function App() {
     <Router>
     <Switch>
         <FetchUser.Provider value={getUniqueStr}>
-            <div style={{position:'relative', overflow:'hidden'}}>
+            <div style={{position:'relative'}}>
             <GlobalStyle />
             {/* ログイン画面 ----------------------------------------*/}
                 {loginState &&
