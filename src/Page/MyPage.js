@@ -10,18 +10,22 @@ const MyPage = () => {
     const thisUser = useContext(FetchUser);
     const [fetchUserData , setFetchUserData] = useState([]);
     const [contentEdit , setContentEdit] = useState(false);
-
+    const [lunchTime , setLunchTime] = useState("11:00-12:00");
+    const [talkTheme , setTalkTheme] = useState("気ままに雑談したい")
+    const [lunchJoin , setLunchJoin] = useState("参加");
+    const [lunchGenre , setLunchGenre] = useState("和食");
     const [editName , setEditName] = useState("");
     const [editAge , setEditAge] = useState("");
     const [editTeam , setEditTeam] = useState("");
     const [editIntroduction , setEditIntroduction] = useState("");
-    const [lunchJoin , setLunchJoin] = useState("参加");
-    const [lunchGenre , setLunchGenre] = useState("和食");
+
 
 
     const patchData = {
         "lunchState" : lunchJoin,
         "lunchGenre" : lunchGenre,
+        "lunchTime" : lunchTime,
+        "talkTheme" : talkTheme,
         "username" : editName,
         "age" : editAge,
         "team" : editTeam,
@@ -43,6 +47,8 @@ const MyPage = () => {
         setFetchUserData(thisUser);
         const v_status = thisUser.filter(m => m.lunchState).map( d => d.lunchState);
         const v_genre = thisUser.filter(m => m.lunchGenre).map( d => d.lunchGenre);
+        const v_time = thisUser.filter(m => m.lunchTime).map( d => d.lunchTime);
+        const v_talk = thisUser.filter(m => m.talkTheme).map( d => d.talkTheme);
         const v_name = thisUser.filter(m => m.username).map( d => d.username);
         const v_age = thisUser.filter(m => m.age).map( d => d.age);
         const v_team = thisUser.filter(m => m.team).map( d => d.team);
@@ -50,6 +56,8 @@ const MyPage = () => {
 
         setLunchJoin(v_status[0]);
         setLunchGenre(v_genre[0]);
+        setLunchGenre(v_time[0]);
+        setTalkTheme(v_talk[0]);
         setEditName(v_name[0]);
         setEditAge(v_age[0]);
         setEditTeam(v_team[0]);
@@ -104,12 +112,18 @@ const MyPage = () => {
                                     <PagePrimaryText>本日のランチへの参加</PagePrimaryText>
                                     <PagePrimaryContent>{n.lunchState}</PagePrimaryContent>
                                 </PageContentInner>
-
                                 <PageContentInner>
                                         <PagePrimaryText>食べたいご飯のジャンル</PagePrimaryText>
                                         <PagePrimaryContent>{n.lunchGenre}</PagePrimaryContent>
                                 </PageContentInner>
-                                
+                                <PageContentInner>
+                                        <PagePrimaryText>希望時間</PagePrimaryText>
+                                        <PagePrimaryContent>{n.lunchTime}</PagePrimaryContent>
+                                </PageContentInner>
+                                <PageContentInner>
+                                        <PagePrimaryText>話したい話題</PagePrimaryText>
+                                        <PagePrimaryContent>{n.talkTheme}</PagePrimaryContent>
+                                </PageContentInner>
                                 <PageContentInner>
                                     <PagePrimaryText>名前 / ニックネーム</PagePrimaryText>
                                     <PagePrimaryContent>{n.username}</PagePrimaryContent>
@@ -143,10 +157,30 @@ const MyPage = () => {
                                 <input type="radio" value="不参加" onChange={ e => setLunchJoin( e.target.value )}　checked={lunchJoin === "不参加"} />不参加
                             </label>
 
-                            <select value={lunchGenre} onChange={ (e) => setLunchGenre( e.target.value )}>
-                                <option value="和食">和食</option>
-                                <option value="洋食">洋食</option>
-                            </select>
+                            {lunchJoin === "参加"　&&
+                            
+                                <>
+                                <select value={lunchTime} onChange={ e => setLunchTime(e.target.value)}>
+                                    <option value="11:00-12:00">11:00-12:00</option>
+                                    <option value="12:00-13:00">12:00-13:00</option>
+                                    <option value="13:00-14:00">13:00-14:00</option>
+                                </select>
+
+                                <select value={talkTheme} onChange={ e => setTalkTheme(e.target.value)} >
+                                    <option value="キャリアについて相談したい0">キャリアについて相談したい</option>
+                                    <option value="気ままに雑談したい">気ままに雑談したい</option>
+                                    <option value="業界やビジネスについて聞いてみたい">業界やビジネスについて聞いてみたい</option>
+                                </select>
+
+                                <select value={lunchGenre} onChange={ (e) => setLunchGenre( e.target.value )}>
+                                    <option value="和食">和食</option>
+                                    <option value="洋食">洋食</option>
+                                </select>
+
+                                </>
+                            }
+
+
                         </div>
                         名前
                         <input type="text" value={editName} onChange={ (e) => setEditName(e.target.value) } />

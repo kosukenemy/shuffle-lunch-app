@@ -24,6 +24,8 @@ export const fetchUserlist = async() => {
             introduction : m['introduction'],
             lunchState : m['lunchState'],
             lunchGenre : m['lunchGenre'],
+            lunchTime :m['lunchTime'],
+            talkTheme : m['talkTheme'],
             email: m['email'],
             password : m['password']
         }))
