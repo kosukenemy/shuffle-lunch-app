@@ -63,11 +63,11 @@ const Home = () => {
                             {matchAllUsers.map((user , idx) => (
                                 <div key={idx}>
                                     {user.username}
+                                    <div>
+                                        <button>お誘いメールを送信する</button>
+                                    </div>
                                 </div>
                             ))}
-                            <div>
-                                <button>お誘いメールを送信する</button>
-                            </div>
                         </div>
                     :
                         <div>

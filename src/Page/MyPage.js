@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { FetchUser } from '../App';
-import { PageTitle, EditButton, PageInnerWrapper, PageContentInner, PagePrimaryText, PagePrimaryContent, MyPageUserIcon, PageColumn, PageRow } from '../Style/Style'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { PageTitle, EditButton, PageInnerWrapper, PageContentInner, PagePrimaryText, PagePrimaryContent, MyPageUserIcon, PageColumn, PageRow, TitleIconProps } from '../Style/Style'
 const API = process.env.REACT_APP_BASEAPI
 const POST_API_KEY = process.env.REACT_APP_POST_API_KEY
 
@@ -91,9 +92,9 @@ const MyPage = () => {
                 <PageTitle>
                     
                     {!contentEdit ?
-                        <span>マイページ</span>
+                        <><AccountCircleIcon style={TitleIconProps} /><span>マイページ</span></>
                         :
-                        <span>マイページ編集</span>
+                        <><AccountCircleIcon style={TitleIconProps} /><span>マイページ編集</span></>
                         }
                 </PageTitle>
             </div>

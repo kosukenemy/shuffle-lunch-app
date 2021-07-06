@@ -97,6 +97,11 @@ export const BasicButton = styled.button`
     display: block;
     padding: 10px 5px; 
     font-weight: 600;
+
+    &:hover {
+        transition: all .3s ease-in-out;
+        opacity: 0.8;
+    }
 `;
 
 export const LogOutButton = styled(BasicButton)`
@@ -208,6 +213,8 @@ export const PageTitle = styled.h2`
     line-height: 1;
     letter-spacing: 0.02em;
     margin: 0px auto 20px;
+    display: flex;
+    align-items: center;
 `;
 
 export const EditButton = styled(BasicButton)`
@@ -261,3 +268,12 @@ export const PagePrimaryContent = styled.p`
     margin: 0 auto 10px;
     white-space: pre-wrap;
 `;
+
+/* ----------------------
+    マテリアルUI Icon 調整
+------------------------ */
+
+export const TitleIconProps = {
+    fontSize : "2rem",
+    marginRight : "10px"
+}
