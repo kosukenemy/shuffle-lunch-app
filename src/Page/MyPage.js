@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { FetchUser } from '../App';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { PageTitle, EditButton, PageInnerWrapper, PageContentInner, PagePrimaryText, PagePrimaryContent, MyPageUserIcon, PageColumn, PageRow, TitleIconProps } from '../Style/Style'
+import { PageTitle, EditButton, PageInnerWrapper, PageContentInner, PagePrimaryText, PagePrimaryContent, MyPageUserIcon, PageColumn, PageRow, TitleIconProps, MyPageInputEdit } from '../Style/Style'
 const API = process.env.REACT_APP_BASEAPI
 const POST_API_KEY = process.env.REACT_APP_POST_API_KEY
 
@@ -116,7 +116,7 @@ const MyPage = () => {
                                         <PagePrimaryContent><span>所属</span>{n.team}</PagePrimaryContent>
                                         <PagePrimaryContent><span>氏名</span>{n.username}</PagePrimaryContent>
                                         <PagePrimaryContent><span>年齢</span>{n.age} 才</PagePrimaryContent>
-                                        <PagePrimaryContent><span>ひとこと</span>{n.introduction}</PagePrimaryContent>
+                                        <PagePrimaryContent><span>一言</span>{n.introduction}</PagePrimaryContent>
                                     </div>
                                 </PageContentInner>
                                 
@@ -151,19 +151,19 @@ const MyPage = () => {
                                     <div>
                                         <PagePrimaryContent>
                                             <span>所属</span>
-                                            <input type="text" value={editTeam} onChange={ (e) => setEditTeam(e.target.value) } />
+                                            <MyPageInputEdit type="text" value={editTeam} onChange={ (e) => setEditTeam(e.target.value) } />
                                         </PagePrimaryContent>
                                         <PagePrimaryContent>
                                             <span>氏名</span>
-                                            <input type="text" value={editName} onChange={ (e) => setEditName(e.target.value) } />
+                                            <MyPageInputEdit type="text" value={editName} onChange={ (e) => setEditName(e.target.value) } />
                                         </PagePrimaryContent>
                                         <PagePrimaryContent>
                                             <span>年齢</span>
-                                            <input type="text" value={editAge} onChange={ (e) => setEditAge(e.target.value) } />
+                                            <MyPageInputEdit type="text" value={editAge} onChange={ (e) => setEditAge(e.target.value) } />
                                         </PagePrimaryContent>
                                         <PagePrimaryContent>
-                                            <span>ひとこと</span>
-                                            <input type="text" value={editIntroduction} onChange={ (e) => setEditIntroduction(e.target.value) } />
+                                            <span>一言</span>
+                                            <MyPageInputEdit type="text" value={editIntroduction} onChange={ (e) => setEditIntroduction(e.target.value) } />
                                         </PagePrimaryContent>
                                     </div>
                                 </PageContentInner>

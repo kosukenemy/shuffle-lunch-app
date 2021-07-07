@@ -278,6 +278,13 @@ export const PagePrimaryContent = styled.p`
     }
 `;
 
+/* マイページ編集 */
+
+export const MyPageInputEdit = styled(LoginField)`
+    display: inline;
+    margin: 0;
+`;
+
 /* ----------------------
     マテリアルUI Icon 調整
 ------------------------ */
