@@ -5,6 +5,7 @@ import { PageTitle, EditButton, PageInnerWrapper, PageContentInner, PagePrimaryT
 const API = process.env.REACT_APP_BASEAPI
 const POST_API_KEY = process.env.REACT_APP_POST_API_KEY
 
+
 const MyPage = () => {
 
 
@@ -40,7 +41,6 @@ const MyPage = () => {
         setContentEdit(!contentEdit)
         EditedData();
         console.log(patchData)
-        window.location.reload();
     }
     
 
@@ -63,6 +63,7 @@ const MyPage = () => {
         setEditAge(v_age[0]);
         setEditTeam(v_team[0]);
         setEditIntroduction(v_introduction[0]);
+
     },[thisUser])
 
 
@@ -110,36 +111,23 @@ const MyPage = () => {
                             <MyPageUserIcon src={n.poster} alt={n.username} />
                             <PageRow>
                                 <PageContentInner>
-                                    <PagePrimaryText>本日のランチへの参加</PagePrimaryText>
-                                    <PagePrimaryContent>{n.lunchState}</PagePrimaryContent>
+                                    <PagePrimaryText>プロフィール</PagePrimaryText>
+                                    <div>
+                                        <PagePrimaryContent><span>所属</span>{n.team}</PagePrimaryContent>
+                                        <PagePrimaryContent><span>氏名</span>{n.username}</PagePrimaryContent>
+                                        <PagePrimaryContent><span>年齢</span>{n.age} 才</PagePrimaryContent>
+                                        <PagePrimaryContent><span>ひとこと</span>{n.introduction}</PagePrimaryContent>
+                                    </div>
                                 </PageContentInner>
+                                
                                 <PageContentInner>
-                                        <PagePrimaryText>食べたいご飯のジャンル</PagePrimaryText>
-                                        <PagePrimaryContent>{n.lunchGenre}</PagePrimaryContent>
-                                </PageContentInner>
-                                <PageContentInner>
-                                        <PagePrimaryText>希望時間</PagePrimaryText>
-                                        <PagePrimaryContent>{n.lunchTime}</PagePrimaryContent>
-                                </PageContentInner>
-                                <PageContentInner>
-                                        <PagePrimaryText>話したい話題</PagePrimaryText>
-                                        <PagePrimaryContent>{n.talkTheme}</PagePrimaryContent>
-                                </PageContentInner>
-                                <PageContentInner>
-                                    <PagePrimaryText>名前 / ニックネーム</PagePrimaryText>
-                                    <PagePrimaryContent>{n.username}</PagePrimaryContent>
-                                </PageContentInner>
-                                <PageContentInner>
-                                    <PagePrimaryText>年齢</PagePrimaryText>
-                                    <PagePrimaryContent>{n.age}</PagePrimaryContent>
-                                </PageContentInner>
-                                <PageContentInner>
-                                    <PagePrimaryText>所属</PagePrimaryText>
-                                    <PagePrimaryContent>{n.team}</PagePrimaryContent>
-                                </PageContentInner>
-                                <PageContentInner>
-                                    <PagePrimaryText>紹介文 / ひとこと</PagePrimaryText>
-                                    <PagePrimaryContent>{n.introduction}</PagePrimaryContent>
+                                    <PagePrimaryText>ランチ情報</PagePrimaryText>
+                                    <div>
+                                        <PagePrimaryContent><span>ランチステータス</span>{n.lunchState}</PagePrimaryContent>
+                                        <PagePrimaryContent><span>食べたいご飯のジャンル</span>{n.lunchGenre}</PagePrimaryContent>
+                                        <PagePrimaryContent><span>希望時間</span>{n.lunchTime}</PagePrimaryContent>
+                                        <PagePrimaryContent><span>話したい話題 </span>{n.talkTheme}</PagePrimaryContent>
+                                    </div>
                                 </PageContentInner>
                             </PageRow>
                         </PageColumn>
@@ -149,51 +137,81 @@ const MyPage = () => {
             : 
 
                 <PageInnerWrapper>
+                    <div style={{display:'flex', width:' 260px', margin: '0 0 0 auto'}}>
+                        <EditButton onClick={handleEditSubmit} type="submit">保存</EditButton>
+                        <EditButton onClick={() => setContentEdit(!contentEdit)}>キャンセル</EditButton>
+                    </div>
                     {fetchUserData.slice(0 ,1).map(((n , idx) => (
-                        <form key={idx} onSubmit={(e) => handleEditSubmit(e)}>
+                        <PageColumn key={idx} onSubmit={(e) => handleEditSubmit(e)}>
+                            <form style={{display:'flex'}}>
+                                <MyPageUserIcon src={n.poster} alt={n.username} />
+                                <PageRow>
+                                <PageContentInner>
+                                    <PagePrimaryText>プロフィール</PagePrimaryText>
+                                    <div>
+                                        <PagePrimaryContent>
+                                            <span>所属</span>
+                                            <input type="text" value={editTeam} onChange={ (e) => setEditTeam(e.target.value) } />
+                                        </PagePrimaryContent>
+                                        <PagePrimaryContent>
+                                            <span>氏名</span>
+                                            <input type="text" value={editName} onChange={ (e) => setEditName(e.target.value) } />
+                                        </PagePrimaryContent>
+                                        <PagePrimaryContent>
+                                            <span>年齢</span>
+                                            <input type="text" value={editAge} onChange={ (e) => setEditAge(e.target.value) } />
+                                        </PagePrimaryContent>
+                                        <PagePrimaryContent>
+                                            <span>ひとこと</span>
+                                            <input type="text" value={editIntroduction} onChange={ (e) => setEditIntroduction(e.target.value) } />
+                                        </PagePrimaryContent>
+                                    </div>
+                                </PageContentInner>
+                                
+                                <PageContentInner>
+                                    <PagePrimaryText>ランチ情報</PagePrimaryText>
+                                    <div>
+                                        <PagePrimaryContent>
+                                            <span>ランチステータス</span>
+                                            <label>
+                                                <input type="radio" value="参加" onChange={ e => setLunchJoin( e.target.value )}　checked={lunchJoin === "参加"} />参加
+                                                <input type="radio" value="不参加" onChange={ e => setLunchJoin( e.target.value )}　checked={lunchJoin === "不参加"} />不参加
+                                            </label>
+                                        </PagePrimaryContent>
 
-                        <div>
-                            <label>
-                                <input type="radio" value="参加" onChange={ e => setLunchJoin( e.target.value )}　checked={lunchJoin === "参加"} />参加
-                                <input type="radio" value="不参加" onChange={ e => setLunchJoin( e.target.value )}　checked={lunchJoin === "不参加"} />不参加
-                            </label>
+                                        {lunchJoin === "参加"　&&
+                                        <>
+                                        <PagePrimaryContent>
+                                            <span>食べたいご飯のジャンル</span>
+                                            <select value={lunchGenre} onChange={ (e) => setLunchGenre( e.target.value )}>
+                                                <option value="和食">和食</option>
+                                                <option value="洋食">洋食</option>
+                                            </select>
+                                        </PagePrimaryContent>
+                                        <PagePrimaryContent>
+                                            <span>希望時間</span>
+                                            <select value={lunchTime} onChange={ e => setLunchTime(e.target.value)}>
+                                                <option value="11:00-12:00">11:00-12:00</option>
+                                                <option value="12:00-13:00">12:00-13:00</option>
+                                                <option value="13:00-14:00">13:00-14:00</option>
+                                            </select>
+                                        </PagePrimaryContent>
+                                        <PagePrimaryContent>
+                                            <span>話したい話題 </span>
+                                            <select value={talkTheme} onChange={ e => setTalkTheme(e.target.value)} >
+                                                <option value="キャリアについて相談したい0">キャリアについて相談したい</option>
+                                                <option value="気ままに雑談したい">気ままに雑談したい</option>
+                                                <option value="業界やビジネスについて聞いてみたい">業界やビジネスについて聞いてみたい</option>
+                                            </select>
+                                        </PagePrimaryContent>
+                                        </>
+                                        }
+                                    </div>
+                                </PageContentInner>
+                            </PageRow>
+                            </form>
+                        </PageColumn>
 
-                            {lunchJoin === "参加"　&&
-                            
-                                <>
-                                <select value={lunchTime} onChange={ e => setLunchTime(e.target.value)}>
-                                    <option value="11:00-12:00">11:00-12:00</option>
-                                    <option value="12:00-13:00">12:00-13:00</option>
-                                    <option value="13:00-14:00">13:00-14:00</option>
-                                </select>
-
-                                <select value={talkTheme} onChange={ e => setTalkTheme(e.target.value)} >
-                                    <option value="キャリアについて相談したい0">キャリアについて相談したい</option>
-                                    <option value="気ままに雑談したい">気ままに雑談したい</option>
-                                    <option value="業界やビジネスについて聞いてみたい">業界やビジネスについて聞いてみたい</option>
-                                </select>
-
-                                <select value={lunchGenre} onChange={ (e) => setLunchGenre( e.target.value )}>
-                                    <option value="和食">和食</option>
-                                    <option value="洋食">洋食</option>
-                                </select>
-
-                                </>
-                            }
-
-
-                        </div>
-                        名前
-                        <input type="text" value={editName} onChange={ (e) => setEditName(e.target.value) } />
-                        年齢
-                        <input type="text" value={editAge} onChange={ (e) => setEditAge(e.target.value) } />
-                        所属
-                        <input type="text" value={editTeam} onChange={ (e) => setEditTeam(e.target.value) } />
-                        自己紹介
-                        <input type="text" value={editIntroduction} onChange={ (e) => setEditIntroduction(e.target.value) } />
-                        <button onClick={handleEditSubmit} type="submit">保存</button>
-                        <button onClick={() => setContentEdit(contentEdit)}>キャンセル</button>
-                        </form>
                     )))}
                 </PageInnerWrapper>
             }

@@ -239,8 +239,10 @@ export const PageInnerWrapper = styled.div`
 `;
 
 export const PageRow = styled.div`
-    padding: 0px 60px;
+    padding: 0px 30px;
     padding-right: 0px;
+    min-width: 540px;
+    max-width: 540px;
 `;
 
 export const PageColumn = styled.div`
@@ -252,21 +254,28 @@ export const PageContentInner = styled.div`
 `;
 
 export const PagePrimaryText = styled.p`
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 15px;
+    line-height: 1.85;
     letter-spacing: 0.02em;
     font-weight: 600;
     color: rgb(91, 134, 229); /* #616161 */
-    margin: 0 auto 10px;
+    margin: 0 auto 17px;
 `;
 
 export const PagePrimaryContent = styled.p`
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.5;
     letter-spacing: 0.02em;
     font-weight: 600;
     margin: 0 auto 10px;
     white-space: pre-wrap;
+    width: 94%;
+
+    span {
+        font-size:14px;
+        color: #717375;
+        padding-right: 15px;
+    }
 `;
 
 /* ----------------------

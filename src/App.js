@@ -42,6 +42,12 @@ function App() {
             setMatchUserData( await fetchUserlist() );
         }
         FetchAPI();
+
+/*         const interval = setInterval(()=>{
+            FetchAPI();
+        },10000)
+
+        return()=>clearInterval(interval) */
     },[])
 
     const saveToLocalStorage = () => {
