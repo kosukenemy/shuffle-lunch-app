@@ -205,7 +205,7 @@ const MyPage = () => {
                     {fetchUserData.slice(0 ,1).map(((n , idx) => (
                         <PageColumn key={idx} onSubmit={(e) => handleEditSubmit(e)}>
                             <form style={{display:'flex'}}>
-                                <MyPageUserIcon src={n.poster} alt={n.username} />
+                                <MyPageUserIcon src={n.profile_image} alt={n.username} />
                                 <PageRow>
                                 <PageContentInner>
                                     <PagePrimaryText>プロフィール</PagePrimaryText>
