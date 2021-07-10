@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FetchUserlistData } from '../API/API';
-import { MyPageUserIcon, UserInner, UserName } from '../Style/Style'
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import { PageTitle, TitleIconProps, UserListWrapper,MyPageUserIcon, UserInner, UserName } from '../Style/Style'
 
 const Userlist = () => {
 
@@ -17,26 +18,34 @@ const Userlist = () => {
 
     return (
         <div>
-            {userlist.map((user ,idx) => (
-                <div key={idx}>
-                    <UserInner>
-                        <MyPageUserIcon src={user.profile_image} alt={user.username} />
-                        <UserName style={{padding:'0'}}>
-                            <span className="il_team">{user.team}</span>
-                            <span className="il_name">{user.username}</span>
-                        </UserName>
-                    </UserInner>
+        <PageTitle>
+            <><PeopleAltIcon style={TitleIconProps} /><span>ユーザー一覧</span></>    
+        </PageTitle>
+
+        <UserListWrapper>
+        {userlist.map((user ,idx) => (
+            <div key={idx}>
+                <UserInner>
+                    <MyPageUserIcon src={user.profile_image} alt={user.username} />
+                    <UserName style={{padding:'0'}}>
+                        <span className="il_team">{user.team}</span>
+                        <span className="il_name">{user.username}</span>
+                    </UserName>
+                </UserInner>
 
 
-{/*                     <Link to={`userPage/${user.id}`}>
-                    <div>
-                        <img src={user.profile_image} alt={user.username} />
-                        <p>{user.username}</p>
-                    </div>
-                    </Link> */}
+        {/*                     <Link to={`userPage/${user.id}`}>
+                <div>
+                    <img src={user.profile_image} alt={user.username} />
+                    <p>{user.username}</p>
                 </div>
-            ))}
+                </Link> */}
+            </div>
+        ))}
+        </UserListWrapper>
+        
         </div>
+
     )
 }
 export default Userlist;

@@ -2,6 +2,9 @@ import React, { useState, useEffect }  from 'react';
 import { BrowserRouter as Router , Switch, Route, Link } from 'react-router-dom';
 import { fetchUserlist } from '../src/API/API';
 import { GlobalStyle, LoginArea,  LoginField, BasicButton, GradationType1, LogOutButton , HeaderLogo, MenuBar, HomeContainer, SideMenu, MainInner, MainInNavbar, MainArea, User, UserIcon , UserName } from '../src/Style/Style';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 
 // firebase userlist
 import { FetchUserlistData } from '../src/API/API';
@@ -116,11 +119,10 @@ function App() {
                         <SideMenu>
                                 <HeaderLogo>logo</HeaderLogo>
                                 <MenuBar>
-                                    <Link to="/"><li>ダッシュボード</li></Link>
-                                    <Link to="/myPage"><li>マイページ</li></Link>
-                                    <Link to="/userlist"><li>ユーザー一覧</li></Link>
+                                    <Link to="/"><li><DashboardIcon style={{marginRight:'5px'}} />ダッシュボード</li></Link>
+                                    <Link to="/myPage"><li><AccountCircleIcon style={{marginRight:'5px'}} />マイページ</li></Link>
+                                    <Link to="/userlist"><li><PeopleAltIcon style={{marginRight:'5px'}} />ユーザー一覧</li></Link>
                                     <li>フィード</li>
-                                    <li>設定</li>
                                 </MenuBar>
                         </SideMenu>
                         {/* SideMenu*/}

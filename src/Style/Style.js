@@ -134,11 +134,14 @@ export const SideMenu = styled.nav`
 export const MenuBar = styled.ul`
 
     li {
-        padding: 20px 30px;
+        padding: 20px 20px;
         font-size: 14px;
         opacity: 0.8;
         font-weight: 600;
         cursor: pointer;
+        display: flex;
+        align-self: center;
+        line-height: 1.85;
 
         &:hover {
             transition: all .3s ease;
@@ -155,7 +158,7 @@ export const MainInner = styled.div`
 
 export const MainInNavbar = styled.nav`
     width: 100%;
-    max-width: 360px;
+    max-width: 300px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -297,9 +300,18 @@ export const TitleIconProps = {
 /* ----------------------
     ユーザー一覧
 ------------------------ */
+
+export const UserListWrapper = styled.div`
+    width:100%;
+    display: flex;
+
+`
+
 export const UserInner = styled.div`
-    width: 100px;
+    width: 110px;
     text-align: center;
+    margin-bottom: 30px;
+    padding:0px 10px;
 
     .il_name,.il_team { 
         display:block;

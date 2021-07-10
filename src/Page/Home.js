@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FetchUser } from '../App';
-import { fetchUserlist } from '../API/API'
-import { PageTitle, PageInnerWrapper } from '../Style/Style'
+import { FetchUserlistData } from '../API/API';
+import { PageTitle, PageInnerWrapper, TitleIconProps } from '../Style/Style';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 
 
 
@@ -19,7 +20,7 @@ const Home = () => {
     useEffect(() => {
         setUserStatus(thisUser);
         const FetchAPI = async() => {
-            setJoinStatusUsers(await fetchUserlist());
+            setJoinStatusUsers(await FetchUserlistData());
         }
         FetchAPI();
     },[thisUser])
@@ -30,8 +31,6 @@ const Home = () => {
                             .filter(m => m.lunchTime === withLunchTime[0])
                             .filter(t => t.talkTheme === withTalkTheme[0])
 
-    console.log(matchAllUsers)
-
     if( matchAllUsers === []) {
         setUserNotFind(!userNotFind);
     }
@@ -39,7 +38,7 @@ const Home = () => {
     return (
         <div>
                 <PageTitle> 
-                    <span>ダッシュボード</span>
+                    <><DashboardIcon style={TitleIconProps} /><span>ダッシュボード</span></>
                 </PageTitle>
                 
                 <PageInnerWrapper>
