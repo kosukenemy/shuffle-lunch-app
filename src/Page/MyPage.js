@@ -53,6 +53,7 @@ const MyPage = () => {
     useEffect(() => {
         setFetchUserData(thisUser);
         const v_id = thisUser.filter(m => m.id).map( d => d.id);
+        const v_profileURL = thisUser.filter(m => m.profile_image).map( d => d.profile_image);
         const v_status = thisUser.filter(m => m.lunchState).map( d => d.lunchState);
         const v_genre = thisUser.filter(m => m.lunchGenre).map( d => d.lunchGenre);
         const v_time = thisUser.filter(m => m.lunchTime).map( d => d.lunchTime);
@@ -62,7 +63,8 @@ const MyPage = () => {
         const v_team = thisUser.filter(m => m.team).map( d => d.team);
         const v_introduction = thisUser.filter(m => m.introduction).map( d => d.introduction);
 
-
+        setFireBaseUserID(v_id[0]);
+        setImageUrl(v_profileURL[0]);
         setLunchJoin(v_status[0]);
         setLunchGenre(v_genre[0]);
         setLunchGenre(v_time[0]);
@@ -71,7 +73,7 @@ const MyPage = () => {
         setEditAge(v_age[0]);
         setEditTeam(v_team[0]);
         setEditIntroduction(v_introduction[0]);
-        setFireBaseUserID(v_id[0])
+
 
     },[thisUser])
 

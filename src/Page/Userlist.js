@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchUserlist } from '../API/API'
+import { FetchUserlistData } from '../API/API';
 
 const Userlist = () => {
 
@@ -8,16 +8,16 @@ const Userlist = () => {
 
     useEffect(() => {
         const FetchAPI = async() => {
-        setUserlist(await fetchUserlist());
+        setUserlist(await FetchUserlistData());
         }
         FetchAPI();
     },[])
-    /* console.log(userlist) */
+    console.log(userlist)
 
     return (
         <div>
-            {userlist.map((user) => (
-                <div key={user.id}>
+            {userlist.map((user ,idx) => (
+                <div key={idx}>
                     <Link to={`userPage/${user.id}`}>
                     <div>
                         <img src={user.poster} alt={user.username} />
