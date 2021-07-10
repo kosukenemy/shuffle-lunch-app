@@ -1,5 +1,7 @@
 import firebase from 'firebase/app'; //必須
+import "firebase/storage";
 import 'firebase/firestore'; 
+
 
 var firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
@@ -13,4 +15,6 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+var storage_obj = firebase.storage();
+export const storage = storage_obj;
 export const db = firebase.firestore();

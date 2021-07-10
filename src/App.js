@@ -24,28 +24,21 @@ function App() {
 
     const [inputpassword ,setInputpassword] = useState("");
 
-    // fetchUserlistを呼んで返す
-    const [matchUserData ,setMatchUserData ] = useState([]);
 
     // firebase userlist 関数
     const [getUserlist , setGetUserlist] = useState([{}]);
-
 
 
     // ユーザーのログイン状態のステート,ステートはセッションストレージに保存
     const [loginState , SetLoginState ] = useState(
         window.sessionStorage.getItem("loginState") ? false : true
     );
-
-    const getUniqueStr = matchUserData.filter(this_user => this_user.email === inputEmail).map(m => m);
-
-    // ランチ参加可能なユーザー
-    /* const lunchJoinUser = matchUserData.filter( join => join.lunchState === "参加" ) */
+    // fire base
+    const getUniqueStr = getUserlist.filter(this_user => this_user.email === inputEmail).map(m => m);
 
 
     useEffect(() => {
         const FetchAPI = async() => {
-            setMatchUserData( await fetchUserlist() );
             setGetUserlist( await FetchUserlistData() );
         }
         FetchAPI();
@@ -56,6 +49,7 @@ function App() {
 
         return()=>clearInterval(interval) */
     },[])
+
 
 
     const saveToLocalStorage = () => {
@@ -79,20 +73,7 @@ function App() {
     const handleSubmitToLogin = (e) => {
         e.preventDefault();
 
-        // submitされたe-mailとpasswordでjsonからユーザ情報を検索して、Trueならログイン
-/*         if(matchUserData.map(m => (m.email)).includes(inputEmail)) {
-            if(matchUserData.map(m => (m.password)).includes(inputpassword)) {
-                SetLoginState(!loginState)
-                saveToLocalStorage();
-            }
-
-                
-        } else {
-            alert('ユーザーは登録されていません。')
-            SetLoginState(loginState)
-        }  */
-
-        // fireBase ver.
+        // fireBase
         if(getUserlist.map(m => (m.email)).includes(inputEmail)) {
             if(getUserlist.map(m => (m.password)).includes(inputpassword)) {
 
@@ -147,24 +128,10 @@ function App() {
                         {/* main*/}
                         <MainInner>
                             <MainInNavbar>  
-{/*                                     {matchUserData.filter(this_user => this_user.email === inputEmail).map(u => (
-                                        <div key={u.id}>
-                                            <User>
-                                                <UserIcon src={u.poster} alt={u.username}  />
-                                                <UserName>
-                                                    <span className="team">{u.team}</span>
-                                                    <Link to="/myPage">
-                                                        <span className="name">{u.username}</span>
-                                                    </Link>
-                                                </UserName>
-                                            </User>
-                                        </div>
-                                    ) )} */}
-
                                         {getUserlist.filter(this_user => this_user.email === inputEmail).map((u ,idx) => (
                                         <div key={idx}>
                                             <User>
-                                                {/* <UserIcon src={u.poster} alt={u.username}  /> */}
+                                                <UserIcon src={u.profile_image} alt={u.username}  />
                                                 <UserName>
                                                     <span className="team">{u.team}</span>
                                                     <Link to="/myPage">

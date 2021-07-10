@@ -7,8 +7,6 @@ const GET_API_KEY = process.env.REACT_APP_GET_API_KEY
 
 
 
-
-
 /* --------
 ユーザー一覧
 ----------*/
@@ -62,11 +60,12 @@ export const fetchUserDetail = async (id) => {
 export const FetchUserlistData = async() => {
     try {
         const firebaseData = [];
+
         await db.collection('userlist').get().then(querySnapshot => {
             querySnapshot.forEach(doc => {
                 firebaseData.push(doc.data())
                 console.log(firebaseData)
-
+                
             })
         })
         return firebaseData;
@@ -74,5 +73,7 @@ export const FetchUserlistData = async() => {
     } catch(err) {  console.log(err , 'firebaseに接続できませんでした') }
 }
 
-        
+
+
+
 

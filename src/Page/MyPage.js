@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { FetchUser } from '../App';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { PageTitle, EditButton, PageInnerWrapper, PageContentInner, PagePrimaryText, PagePrimaryContent, MyPageUserIcon, PageColumn, PageRow, TitleIconProps, MyPageInputEdit } from '../Style/Style'
-const API = process.env.REACT_APP_BASEAPI
-const POST_API_KEY = process.env.REACT_APP_POST_API_KEY
+import { db } from '../API/Firebase';
+import { storage } from '../API/Firebase'
+import { PageTitle, EditButton, PageInnerWrapper, PageContentInner, PagePrimaryText, PagePrimaryContent, MyPageUserIcon, PageColumn, PageRow, TitleIconProps, MyPageInputEdit } from '../Style/Style';
+
 
 
 const MyPage = () => {
@@ -20,6 +21,11 @@ const MyPage = () => {
     const [editAge , setEditAge] = useState("");
     const [editTeam , setEditTeam] = useState("");
     const [editIntroduction , setEditIntroduction] = useState("");
+    const [firebaseUserID , setFireBaseUserID ] = useState("");
+    const [image, setImage] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
+    const [error, setError] = useState("");
+    const [progress, setProgress] = useState(100);
 
 
 
@@ -46,6 +52,7 @@ const MyPage = () => {
 
     useEffect(() => {
         setFetchUserData(thisUser);
+        const v_id = thisUser.filter(m => m.id).map( d => d.id);
         const v_status = thisUser.filter(m => m.lunchState).map( d => d.lunchState);
         const v_genre = thisUser.filter(m => m.lunchGenre).map( d => d.lunchGenre);
         const v_time = thisUser.filter(m => m.lunchTime).map( d => d.lunchTime);
@@ -55,6 +62,7 @@ const MyPage = () => {
         const v_team = thisUser.filter(m => m.team).map( d => d.team);
         const v_introduction = thisUser.filter(m => m.introduction).map( d => d.introduction);
 
+
         setLunchJoin(v_status[0]);
         setLunchGenre(v_genre[0]);
         setLunchGenre(v_time[0]);
@@ -63,32 +71,85 @@ const MyPage = () => {
         setEditAge(v_age[0]);
         setEditTeam(v_team[0]);
         setEditIntroduction(v_introduction[0]);
+        setFireBaseUserID(v_id[0])
 
     },[thisUser])
 
 
-
-
-
-    const getID = fetchUserData.slice(0,1).map(m => m.id);
-
     const EditedData = () => {
-        fetch(`${API}/userlist/${getID}` , {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "X-WRITE-API-KEY": POST_API_KEY
-            },
-            body: JSON.stringify(patchData)
-        })
+        (async () => {
+            try {
+                const userRef = db.collection('userlist').doc(firebaseUserID)
+                await userRef.update({
+                    "profile_image" : imageUrl,
+                    "lunchState" : lunchJoin,
+                    "lunchGenre" : lunchGenre,
+                    "lunchTime" : lunchTime,
+                    "talkTheme" : talkTheme,
+                    "username" : editName,
+                    "age" : editAge,
+                    "team" : editTeam,
+                    "introduction" : editIntroduction,
+                })
+        } catch (err) {
+            console.log(`Error: ${JSON.stringify(err)}`)
+        }
+        })()
+
+        setTimeout(() => {
+            window.location.reload();
+        },1000)
     }
 
+    const handleImage = (e) => {
+        const image = e.target.files[0]
+        setImage(image);
+        console.log(image);
+    }
 
+    const onSubmit = (event) => {
+        event.preventDefault();
+        setError("");
+        if (image === "") {
+            console.log("ファイルが選択されていません");
+            setError("ファイルが選択されていません");
+        return;
+        }
+        // アップロード処理
+        console.log("アップロード処理");
+        const storageRef = storage.ref("images/userProfile/"); //どのフォルダの配下に入れるかを設定
+        const imagesRef = storageRef.child(image.name); //ファイル名
+    
+        console.log("ファイルをアップする行為");
+        const upLoadTask = imagesRef.put(image);
+        console.log("タスク実行前");
+    
+        upLoadTask.on(
+            "state_changed",
+            (snapshot) => {
+                console.log("snapshot", snapshot);
+                const percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log(percent + "% done");
+                setProgress(percent);
+            },
+            (error) => {
+                console.log("err", error);
+                setError("ファイルアップに失敗しました。" + error);
+                setProgress(100); //実行中のバーを消す
+            },
+            () => {
+                upLoadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                console.log("File available at", downloadURL);
+                setImageUrl(downloadURL);
+                });
+            }
+        );
+    };
 
+    
 
     return (
         <div>
-
             <div>
                 <PageTitle>
                     
@@ -108,7 +169,7 @@ const MyPage = () => {
 
                     {fetchUserData.slice(0 ,1).map(((n , idx) => 
                         <PageColumn key={idx}>
-                            <MyPageUserIcon src={n.poster} alt={n.username} />
+                            <MyPageUserIcon src={n.profile_image} alt={n.username} />
                             <PageRow>
                                 <PageContentInner>
                                     <PagePrimaryText>プロフィール</PagePrimaryText>
@@ -150,6 +211,11 @@ const MyPage = () => {
                                     <PagePrimaryText>プロフィール</PagePrimaryText>
                                     <div>
                                         <PagePrimaryContent>
+                                            <span>画像</span>
+                                            <input type="file" onChange={handleImage} />
+                                            <button onClick={onSubmit}>アップロード</button>
+                                        </PagePrimaryContent>
+                                        <PagePrimaryContent>
                                             <span>所属</span>
                                             <MyPageInputEdit type="text" value={editTeam} onChange={ (e) => setEditTeam(e.target.value) } />
                                         </PagePrimaryContent>
@@ -159,7 +225,7 @@ const MyPage = () => {
                                         </PagePrimaryContent>
                                         <PagePrimaryContent>
                                             <span>年齢</span>
-                                            <MyPageInputEdit type="text" value={editAge} onChange={ (e) => setEditAge(e.target.value) } />
+                                            <MyPageInputEdit type="number" value={editAge} onChange={ (e) => setEditAge(e.target.value) } />
                                         </PagePrimaryContent>
                                         <PagePrimaryContent>
                                             <span>一言</span>
