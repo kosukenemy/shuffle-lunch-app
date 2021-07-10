@@ -67,7 +67,7 @@ const MyPage = () => {
         setImageUrl(v_profileURL[0]);
         setLunchJoin(v_status[0]);
         setLunchGenre(v_genre[0]);
-        setLunchGenre(v_time[0]);
+        setLunchTime(v_time[0]);
         setTalkTheme(v_talk[0]);
         setEditName(v_name[0]);
         setEditAge(v_age[0]);

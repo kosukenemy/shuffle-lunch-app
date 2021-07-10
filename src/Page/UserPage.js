@@ -16,8 +16,7 @@ const UserPage = () => {
 
     return (
         <div>
-            {userDetail.username}
-            <span>{userDetail.introduction}</span>
+            詳細ページ
         </div>
     )
 }

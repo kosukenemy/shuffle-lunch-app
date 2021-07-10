@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FetchUserlistData } from '../API/API';
+import { MyPageUserIcon, UserInner, UserName } from '../Style/Style'
 
 const Userlist = () => {
 
@@ -18,12 +19,21 @@ const Userlist = () => {
         <div>
             {userlist.map((user ,idx) => (
                 <div key={idx}>
-                    <Link to={`userPage/${user.id}`}>
+                    <UserInner>
+                        <MyPageUserIcon src={user.profile_image} alt={user.username} />
+                        <UserName style={{padding:'0'}}>
+                            <span className="il_team">{user.team}</span>
+                            <span className="il_name">{user.username}</span>
+                        </UserName>
+                    </UserInner>
+
+
+{/*                     <Link to={`userPage/${user.id}`}>
                     <div>
-                        <img src={user.poster} alt={user.username} />
+                        <img src={user.profile_image} alt={user.username} />
                         <p>{user.username}</p>
                     </div>
-                    </Link>
+                    </Link> */}
                 </div>
             ))}
         </div>

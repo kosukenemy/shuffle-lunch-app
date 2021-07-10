@@ -293,3 +293,23 @@ export const TitleIconProps = {
     fontSize : "2rem",
     marginRight : "10px"
 }
+
+/* ----------------------
+    ユーザー一覧
+------------------------ */
+export const UserInner = styled.div`
+    width: 100px;
+    text-align: center;
+
+    .il_name,.il_team { 
+        display:block;
+        text-align: center;
+        padding: 0;
+    }
+    .il_team {
+        display: inline-block;
+        font-size: 10px;
+        color:#3334;
+        padding: 0;
+    }
+`;
