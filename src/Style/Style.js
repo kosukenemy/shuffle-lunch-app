@@ -325,3 +325,23 @@ export const UserInner = styled.div`
         padding: 0;
     }
 `;
+
+/* ----------------------
+    チャットリスト
+------------------------ */
+
+export const ChatUserList = styled(PageInnerWrapper)`
+    display: flex;
+    align-items: center;
+
+`
+
+export const ChatUserListContent = styled.div`
+    padding: 0 30px;
+    color: #334;
+    font-size: 14px;
+    text-align: left;
+    font-weight: 600;
+    .name { display:block; margin:0 auto 10px;}
+    .content { color:#3334; }
+`;

@@ -1,10 +1,10 @@
 import React, { useState, useEffect }  from 'react';
 import { BrowserRouter as Router , Switch, Route, Link } from 'react-router-dom';
-import { fetchUserlist } from '../src/API/API';
 import { GlobalStyle, LoginArea,  LoginField, BasicButton, GradationType1, LogOutButton , HeaderLogo, MenuBar, HomeContainer, SideMenu, MainInner, MainInNavbar, MainArea, User, UserIcon , UserName } from '../src/Style/Style';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 
 // firebase userlist
 import { FetchUserlistData } from '../src/API/API';
@@ -12,6 +12,8 @@ import Home from './Page/Home';
 import Userlist from './Page/Userlist';
 import UserPage from './Page/UserPage';
 import MyPage from './Page/MyPage';
+import ChatList from './Page/ChatList';
+import Chat from './Page/Chat';
 
 export const FetchUser = React.createContext();
 
@@ -122,7 +124,7 @@ function App() {
                                     <Link to="/"><li><DashboardIcon style={{marginRight:'5px'}} />ダッシュボード</li></Link>
                                     <Link to="/myPage"><li><AccountCircleIcon style={{marginRight:'5px'}} />マイページ</li></Link>
                                     <Link to="/userlist"><li><PeopleAltIcon style={{marginRight:'5px'}} />ユーザー一覧</li></Link>
-                                    <li>フィード</li>
+                                    <Link to="/chatlist"><li><ChatBubbleIcon style={{marginRight:'5px'}} />チャット</li></Link>
                                 </MenuBar>
                         </SideMenu>
                         {/* SideMenu*/}
@@ -152,6 +154,8 @@ function App() {
                             <Route path="/userlist" component={Userlist} />
                             <Route path="/userPage/:id" component={UserPage} />
                             <Route path="/myPage" component={MyPage} />
+                            <Route path="/chatlist" component={ChatList} />
+                            <Route path="/chatlist/:id" component={Chat} />
                             </MainArea>
 
                         </MainInner>

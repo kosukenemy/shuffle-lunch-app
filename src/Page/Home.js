@@ -42,8 +42,9 @@ const Home = () => {
                 </PageTitle>
                 
                 <PageInnerWrapper>
-                    <span>あなたのステータス</span>
+                    
                     <Link to="/myPage"><li>ステータスを変更する</li></Link>
+                    <span>あなたのステータス</span>
                     <div>
                         {userStatus.slice(0,1).map((u , idx) => (
                             <div key={idx}>
