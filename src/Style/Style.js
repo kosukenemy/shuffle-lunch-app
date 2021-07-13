@@ -126,7 +126,7 @@ export const HomeContainer = styled.div`
 `;
 
 export const SideMenu = styled.nav`
-    width: 15%;
+    width: 200px;
     border-right: solid 1px #e7e7e7;
     background: transparent;
 `;
@@ -154,6 +154,7 @@ export const MenuBar = styled.ul`
 
 export const MainInner = styled.div`
     width: 85%;
+    position: relative;
 `;
 
 export const MainInNavbar = styled.nav`
@@ -164,13 +165,14 @@ export const MainInNavbar = styled.nav`
     align-items: center;
     margin: 0 0 0 auto;
     padding: 10px 30px;
+    background: #fff;
 `;
 
 export const MainArea = styled.div`
     border-top:solid 1px #e7e7e7;
     padding: 20px 30px;
     background: #F5F5F5;
-    height: 100%;
+    height: 100vh;
 `;
 
 /* ----------------------

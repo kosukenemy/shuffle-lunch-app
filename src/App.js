@@ -133,19 +133,19 @@ function App() {
                         <MainInner>
                             <MainInNavbar>  
                                         {getUserlist.filter(this_user => this_user.email === inputEmail).map((u ,idx) => (
-                                        <div key={idx}>
-                                            <User>
-                                                <UserIcon src={u.profile_image} alt={u.username}  />
-                                                <UserName>
-                                                    <span className="team">{u.team}</span>
-                                                    <Link to="/myPage">
-                                                        <span className="name">{u.username}</span>
-                                                    </Link>
-                                                </UserName>
-                                            </User>
-                                        </div>
+                                            <div className="nav_inner" key={idx}>
+                                                <User>
+                                                    <UserIcon src={u.profile_image} alt={u.username}  />
+                                                    <UserName>
+                                                        <span className="team">{u.team}</span>
+                                                        <Link to="/myPage">
+                                                            <span className="name">{u.username}</span>
+                                                        </Link>
+                                                    </UserName>
+                                                </User>
+                                            </div>
                                     ) )}
-                                <LogOutButton style={GradationType1} onClick={handleLogOut}>ログアウト</LogOutButton>
+                                    <LogOutButton style={GradationType1} onClick={handleLogOut}>ログアウト</LogOutButton>
                             </MainInNavbar>
 
                             {/* component*/}

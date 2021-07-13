@@ -3,7 +3,8 @@ import { FetchUserlistData , FetchChatlistData } from '../API/API';
 import { FetchUser } from '../../src/App'
 import { useParams } from 'react-router';
 import { db } from '../API/Firebase';
-import { UserIcon } from '../Style/Style';
+import { PageTitle , UserIcon , TitleIconProps } from '../Style/Style';
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 
 const Chat = () => {
     
@@ -11,7 +12,7 @@ const Chat = () => {
     const thisUser = useContext(FetchUser);
     const [user , setUser] = useState([]);
     const [chatInput ,setChatInput] = useState("");
-    const [chatData , SetChatData] = useState([]);
+    const [chatData , setChatData] = useState([]);
 
 
     // 自分のデータ
@@ -19,15 +20,17 @@ const Chat = () => {
     // 自分のデータの画像
     const myPic = thisUser.filter( u => u.profile_image ).map( u => u.profile_image );
     // トークするユーザーid
-    const talkToUserID = matchUser.filter( t => t.id ).map( t => t.id)
+    const talkToUserID = matchUser.filter( t => t.id ).map( t => t.id);
+    // トークするユーザー名
+    const talkToUserName = matchUser.filter( t => t.username ).map( t => t.username);
     // 自分のID
-    const myUserID = thisUser.filter( t => t.id ).map( t => t.id);
-
+    const myUserID = thisUser.filter( t => t.id  ).map( t => t.id);
+    console.log(myUserID[0])
 
     useEffect(() => {
         const FetchAPI = async() => {
             setUser(await FetchUserlistData(id) );
-            SetChatData(await FetchChatlistData() );
+            setChatData(await FetchChatlistData() );
         }
         FetchAPI();
     },[id])
@@ -60,22 +63,30 @@ const Chat = () => {
         ChatData();
     }
 
-    const sender = chatData.filter( f => f.fromUser === myUserID[0] , t => t.toUser === myUserID[0] );
-    const receiver = chatData.filter( f => f.toUser === myUserID[0] , f => f.fromUser === talkToUserID[0]);
+
+    const sender = chatData.filter( f => f.fromUser === myUserID[0]).filter( t => t.toUser === talkToUserID[0] );
+    const receiver = chatData.filter( f => f.fromUser === talkToUserID[0]).filter( t => t.toUser === myUserID[0] );
     
 
-    //交互
+    //スプレッド構文で結合
     const chatMessage =　[...sender , ...receiver];
     // 時間でソートさせる (投稿された順)
     const chatMessage_timeSort = chatMessage.sort((a , b) => ( (a.createdAt < b.createdAt) ? -1 : 1))
 
+
     
     return (
         <div>
+            <PageTitle>
+                <><ChatBubbleIcon style={TitleIconProps} />
+                    <span style={{fontSize:'12px', marginRight:'10px'}}>Talk with</span>
+                    <span style={{fontSize:'18px'}}>{talkToUserName[0]}</span>
+                </>
+            </PageTitle>
             <div className="chatbox">
                 <div className="send">
 
-                    {/* 送信 */}
+                    
                     {
                         chatMessage_timeSort.map( (u , idx) => (
                                     <div key={idx}>
@@ -84,22 +95,7 @@ const Chat = () => {
                                     </div>
                                 ))
                     }
-
-                    {/* 受信 */}
-{/*                     {
-                        chatData.filter( f => f.toUser === myUserID[0] , f => f.fromUser === talkToUserID[0])
-                                .map( (u , idx) => (
-                                    <div key={idx}>
-                                        <UserIcon src={u.image} alt={u.username}  />
-                                        {u.contents}
-                                    </div>
-                                ))
-                    }
- */}
-
-
                 </div>
-
 
                 <form>
                     <input onChange={ (e) => setChatInput(e.target.value) } 
