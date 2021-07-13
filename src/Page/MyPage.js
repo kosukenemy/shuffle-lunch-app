@@ -27,7 +27,7 @@ const MyPage = () => {
     const [error, setError] = useState("");
     const [progress, setProgress] = useState(100);
 
-
+    console.log(error , progress )
 
     const patchData = {
         "lunchState" : lunchJoin,

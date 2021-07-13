@@ -41,7 +41,7 @@ const ChatList = () => {
                 {matchAllUsers.map((user ) => (
 
                     <ChatUserList key={user.id}>
-                        <Link style={{display:'flex', alignItems:'center'}} to={`/chatlist/${user.id}`}>
+                        <Link style={{display:'flex', alignItems:'center'}} to={`/chat/${user.id}`}>
                             <MyPageUserIcon src={user.profile_image}  alt={user.username}/>
                             <ChatUserListContent>
                                 <p className="name">{user.username}</p>

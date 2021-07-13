@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router'
+import React from 'react';
+/* import { useParams } from 'react-router' */
 
 const UserPage = () => {
 /*     let { id } = useParams();

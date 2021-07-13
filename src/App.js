@@ -155,7 +155,9 @@ function App() {
                             <Route path="/userPage/:id" component={UserPage} />
                             <Route path="/myPage" component={MyPage} />
                             <Route path="/chatlist" component={ChatList} />
-                            <Route path="/chatlist/:id" component={Chat} />
+                            <Route path="/chat/:id" component={Chat} />
+
+                            
                             </MainArea>
 
                         </MainInner>
