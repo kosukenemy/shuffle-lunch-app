@@ -3,7 +3,6 @@ import { FetchUserlistData , FetchChatlistData } from '../API/API';
 import { FetchUser } from '../../src/App'
 import { useParams } from 'react-router';
 import { db } from '../API/Firebase';
-import firebase from 'firebase';
 import { UserIcon } from '../Style/Style';
 
 const Chat = () => {
@@ -38,15 +37,12 @@ const Chat = () => {
         contents : chatInput,
         toUser : talkToUserID[0],
         fromUser : myUserID[0],
-        image : myPic[0]
+        image : myPic[0],
+        createdAt: new Date()
     }
     
     const ChatData = async() => {
         try {
-/*             const chatRef = db.collection('chatlist').doc("j1hZ5JnpAOTBxTn6bJHR")
-            await chatRef.update({
-                chat: firebase.firestore.FieldValue.arrayUnion(...sendData)
-            }) */
             const chatRef = db.collection('chatlist')
             await chatRef.add(sendData)
         } catch (err) {
@@ -64,18 +60,33 @@ const Chat = () => {
         ChatData();
     }
 
-    console.log(
-        chatData.filter( f => f.toUser === myUserID[0] , f => f.fromUser === talkToUserID[0])
-    )
-
+    const sender = chatData.filter( f => f.fromUser === myUserID[0] , t => t.toUser === myUserID[0] );
+    const receiver = chatData.filter( f => f.toUser === myUserID[0] , f => f.fromUser === talkToUserID[0]);
     
+
+    //交互
+    const chatMessage =　[...sender , ...receiver];
+    // 時間でソートさせる (投稿された順)
+    const chatMessage_timeSort = chatMessage.sort((a , b) => ( (a.createdAt < b.createdAt) ? -1 : 1))
+
     
     return (
         <div>
             <div className="chatbox">
                 <div className="send">
-                    {/* 受信 */}
+
+                    {/* 送信 */}
                     {
+                        chatMessage_timeSort.map( (u , idx) => (
+                                    <div key={idx}>
+                                        <UserIcon src={u.image} alt={u.username}  />
+                                        {u.contents}
+                                    </div>
+                                ))
+                    }
+
+                    {/* 受信 */}
+{/*                     {
                         chatData.filter( f => f.toUser === myUserID[0] , f => f.fromUser === talkToUserID[0])
                                 .map( (u , idx) => (
                                     <div key={idx}>
@@ -84,16 +95,7 @@ const Chat = () => {
                                     </div>
                                 ))
                     }
-                    {/* 送信 */}
-                    {
-                        chatData.filter( f => f.fromUser === myUserID[0] , t => t.toUser === myUserID[0] )
-                                .map( (u , idx) => (
-                                    <div key={idx}>
-                                        <UserIcon src={u.image} alt={u.username}  />
-                                        {u.contents}
-                                    </div>
-                                ))
-                    }
+ */}
 
 
                 </div>
