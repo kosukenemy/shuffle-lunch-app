@@ -2,7 +2,7 @@ import React, { useContext ,useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FetchUser } from '../App';
 import { FetchUserlistData } from '../API/API';
-import { PageTitle, TitleIconProps, MyPageUserIcon, ChatUserList, ChatUserListContent } from '../Style/Style';
+import { PageTitle, TitleIconProps, UserIcon, ChatUserList, ChatUserListContent } from '../Style/Style';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 
 
@@ -29,6 +29,7 @@ const ChatList = () => {
     .filter(m => m.lunchTime === withLunchTime[0])
     .filter(t => t.talkTheme === withTalkTheme[0])
 
+
     return (
         
         <div>
@@ -41,13 +42,17 @@ const ChatList = () => {
                 {matchAllUsers.map((user ) => (
 
                     <ChatUserList key={user.id}>
-                        <Link style={{display:'flex', alignItems:'center'}} to={`/chat/${user.id}`}>
-                            <MyPageUserIcon src={user.profile_image}  alt={user.username}/>
+                        <div style={{display:'flex', alignItems:'center'}}>
+                            <UserIcon src={user.profile_image}  alt={user.username}/>
                             <ChatUserListContent>
                                 <p className="name">{user.username}</p>
-                                <p className="content">こんにちは</p>
                             </ChatUserListContent>
-                        </Link>
+                        </div>
+                        <div>
+                            <Link to={`/chat/${user.id}`}>
+                                <button>チャット</button>
+                            </Link>
+                        </div>
                     </ChatUserList>
 
                 ))}

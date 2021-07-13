@@ -25,7 +25,6 @@ const Chat = () => {
     const talkToUserName = matchUser.filter( t => t.username ).map( t => t.username);
     // 自分のID
     const myUserID = thisUser.filter( t => t.id  ).map( t => t.id);
-    console.log(myUserID[0])
 
     useEffect(() => {
         const FetchAPI = async() => {
@@ -34,6 +33,8 @@ const Chat = () => {
         }
         FetchAPI();
     },[id])
+
+    /* const createDate = new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }); */
 
 
     const sendData = {
@@ -72,8 +73,6 @@ const Chat = () => {
     const chatMessage =　[...sender , ...receiver];
     // 時間でソートさせる (投稿された順)
     const chatMessage_timeSort = chatMessage.sort((a , b) => ( (a.createdAt < b.createdAt) ? -1 : 1))
-
-
     
     return (
         <div>

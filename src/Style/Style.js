@@ -335,15 +335,16 @@ export const UserInner = styled.div`
 export const ChatUserList = styled(PageInnerWrapper)`
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    margin:0 auto 20px;
 
 `
 
 export const ChatUserListContent = styled.div`
-    padding: 0 30px;
+    padding: 0 10px;
     color: #334;
     font-size: 14px;
     text-align: left;
     font-weight: 600;
-    .name { display:block; margin:0 auto 10px;}
-    .content { color:#3334; }
+    .name { display:block;}
 `;
