@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import dayjs from 'dayjs';
 import { FetchUserlistData , FetchChatlistData } from '../API/API';
 import { FetchUser } from '../../src/App'
 import { useParams } from 'react-router';
@@ -73,7 +74,9 @@ const Chat = () => {
     const chatMessage =　[...sender , ...receiver];
     // 時間でソートさせる (投稿された順)
     const chatMessage_timeSort = chatMessage.sort((a , b) => ( (a.createdAt < b.createdAt) ? -1 : 1))
-    
+    console.log(chatMessage_timeSort)
+
+
     return (
         <div>
             <PageTitle>
@@ -87,12 +90,23 @@ const Chat = () => {
 
                     
                     {
-                        chatMessage_timeSort.map( (u , idx) => (
-                                    <div key={idx}>
-                                        <UserIcon src={u.image} alt={u.username}  />
-                                        {u.contents}
-                                    </div>
-                                ))
+                        chatMessage_timeSort.map( (u , idx) =>  {
+                            const messageDate = dayjs(u.createdAt.toDate());
+                            return (
+                                <div key={idx}>
+                                    <UserIcon src={u.image} alt={u.username}  />
+                                    {u.contents}
+                                    <p>
+                                    <time>
+                                        {new Date(u.createdAt.seconds * 1000).toLocaleDateString("ja")}
+                                        <span>
+                                            {messageDate.format('HH:mm')}
+                                        </span>
+                                    </time>
+                                    </p>
+                                </div>
+                            )
+                        })
                     }
                 </div>
 
