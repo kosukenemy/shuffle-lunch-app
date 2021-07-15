@@ -13,7 +13,6 @@ const Userlist = () => {
         }
         FetchAPI();
     },[])
-    console.log(userlist)
 
     return (
         <div>

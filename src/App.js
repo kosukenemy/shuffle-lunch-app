@@ -47,12 +47,6 @@ function App() {
             setGetUserlist( await FetchUserlistData() );
         }
         FetchAPI();
-
-/*         const interval = setInterval(()=>{
-            FetchAPI();
-        },10000)
-
-        return()=>clearInterval(interval) */
     },[])
 
 

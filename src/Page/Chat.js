@@ -14,6 +14,7 @@ const Chat = () => {
     const [user , setUser] = useState([]);
     const [chatInput ,setChatInput] = useState("");
     const [chatData , setChatData] = useState([]);
+    const [mounted , setMounted] = useState(false);
 
 
     // 自分のデータ
@@ -27,16 +28,25 @@ const Chat = () => {
     // 自分のID
     const myUserID = thisUser.filter( t => t.id  ).map( t => t.id);
 
-    useEffect(() => {
+    
+
+    useEffect( () => {
         const FetchAPI = async() => {
             setUser(await FetchUserlistData(id) );
-            setChatData(await FetchChatlistData() );
+            setChatData(await FetchChatlistData() ); 
         }
         FetchAPI();
+
     },[id])
 
-    /* const createDate = new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }); */
 
+    useEffect(() => {
+/*         const fetchInterval = setInterval(async() => {
+            setChatData(await FetchChatlistData() );  
+        }, 10000);
+
+        return () => clearInterval(fetchInterval) */
+    },[])
 
     const sendData = {
         contents : chatInput,
@@ -50,8 +60,19 @@ const Chat = () => {
         try {
             const chatRef = db.collection('chatlist')
             await chatRef.add(sendData)
+            
         } catch (err) {
             console.log(`Error: ${JSON.stringify(err)}`)
+        }
+    }
+
+    const reFechAPI = () => {
+        setMounted(!mounted);
+        if (!mounted) {
+
+            ( async() => {
+                setChatData(await FetchChatlistData() )
+            })()
         }
     }
 
@@ -63,6 +84,7 @@ const Chat = () => {
         // インプット初期化
         setChatInput("");
         ChatData();
+        reFechAPI();
     }
 
 

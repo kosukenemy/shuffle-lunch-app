@@ -16,12 +16,14 @@ const ChatList = () => {
     const withTalkTheme = userStatus.filter(w => w.talkTheme ).map(u => u.talkTheme );
 
     useEffect(() => {
+        
         setUserStatus(thisUser);
         const FetchAPI = async() => {
             
             setJoinStatusUsers(await FetchUserlistData());
         }
         FetchAPI();
+        
     },[thisUser])
 
     const matchAllUsers = joinStatusUsers.filter(j => j.id !== myID[0])
