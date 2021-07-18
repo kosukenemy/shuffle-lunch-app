@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import dayjs from 'dayjs';
-import { FetchUserlistData , FetchChatlistData } from '../API/API';
+import { FetchUserlistData , FetchChatlistData , FetchChatlist } from '../API/API';
 import { FetchUser } from '../../src/App'
 import { useParams } from 'react-router';
 import { db } from '../API/Firebase';
@@ -15,6 +15,7 @@ const Chat = () => {
     const [chatInput ,setChatInput] = useState("");
     const [chatData , setChatData] = useState([]);
     const [mounted , setMounted] = useState(false);
+    const [snapChatData , setUserChatData] = useState([]);
 
 
     // 自分のデータ
@@ -36,67 +37,73 @@ const Chat = () => {
             setChatData(await FetchChatlistData() ); 
         }
         FetchAPI();
-
     },[id])
 
-
     useEffect(() => {
-/*         const fetchInterval = setInterval(async() => {
-            setChatData(await FetchChatlistData() );  
-        }, 10000);
-
-        return () => clearInterval(fetchInterval) */
+        
+        (async() => {
+            setUserChatData( await FetchChatlist()  );
+        })()
     },[])
-
-    const sendData = {
-        contents : chatInput,
-        toUser : talkToUserID[0],
-        fromUser : myUserID[0],
-        image : myPic[0],
-        createdAt: new Date()
-    }
     
+    
+
     const ChatData = async() => {
         try {
             const chatRef = db.collection('chatlist')
-            await chatRef.add(sendData)
+            await chatRef.add({
+                contents : chatInput,
+                toUser : talkToUserID[0],
+                fromUser : myUserID[0],
+                image : myPic[0],
+                createdAt: new Date()
+            })
             
         } catch (err) {
             console.log(`Error: ${JSON.stringify(err)}`)
         }
-    }
-
-    const reFechAPI = () => {
-        setMounted(!mounted);
-        if (!mounted) {
-
-            ( async() => {
-                setChatData(await FetchChatlistData() )
-            })()
-        }
-    }
-
-
-
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // インプット初期化
-        setChatInput("");
-        ChatData();
         reFechAPI();
     }
 
 
+
+
+    const reFechAPI = () => {
+        setMounted(!mounted);
+        if (!mounted) {
+            
+            ( async() => {
+                setChatData(await FetchChatlistData() )
+            })()
+
+        }
+    }
+
+
+    const handleSubmit = (e) => {
+
+        if ( !chatInput.trim() ) {
+            return null
+        } else {
+            e.preventDefault();
+            // インプット初期化
+            setChatInput("");
+            ChatData();
+        }
+
+    }
+
+    // chatData
     const sender = chatData.filter( f => f.fromUser === myUserID[0]).filter( t => t.toUser === talkToUserID[0] );
     const receiver = chatData.filter( f => f.fromUser === talkToUserID[0]).filter( t => t.toUser === myUserID[0] );
-    
+
+    console.log(snapChatData)
 
     //スプレッド構文で結合
     const chatMessage =　[...sender , ...receiver];
     // 時間でソートさせる (投稿された順)
-    const chatMessage_timeSort = chatMessage.sort((a , b) => ( (a.createdAt < b.createdAt) ? -1 : 1))
-    console.log(chatMessage_timeSort)
+    const chatMessage_timeSort = chatMessage.sort((a , b) => ( (a.createdAt < b.createdAt) ? -1 : 1));
+
 
 
     return (
@@ -130,13 +137,16 @@ const Chat = () => {
                             )
                         })
                     }
+
+
                 </div>
 
                 <form>
-                    <input onChange={ (e) => setChatInput(e.target.value) } 
-                            type="text" 
-                            value={chatInput}
-                    />
+                    <textarea
+                    onChange={ (e) => setChatInput(e.target.value) } 
+                    type="text" 
+                    value={chatInput}
+                    ></textarea>
                     <button type="submit" onClick={handleSubmit}>送信</button>
                 </form>
             </div>

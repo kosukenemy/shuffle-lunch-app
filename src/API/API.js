@@ -1,4 +1,3 @@
-
 /* import axios from 'axios'; */
 import { db } from './Firebase';
 
@@ -33,11 +32,28 @@ export const FetchChatlistData = async() => {
                 firebaseData.push(doc.data())    
             })
         })
-        return firebaseData;
+        return firebaseData ;
         
     } catch(err) {  console.log(err , '接続できませんでした') }
 }
 
 
+/* --------
+　snapShot
+----------*/
 
-
+export const FetchChatlist = () => {
+    try {
+        const snapShotData = [];
+        
+        db.collection('chatlist').onSnapshot(querySnapshot => {
+            querySnapshot.forEach( doc => {
+                snapShotData.push({ ...doc.data() })
+            })
+        })
+        return snapShotData;
+    
+    } catch (error) {
+        console.log('error' , error)
+    }
+}
