@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import dayjs from 'dayjs';
-import { FetchUserlistData , FetchChatlistData , FetchChatlist } from '../API/API';
+import { FetchUserlistData } from '../API/API';
 import { FetchUser } from '../../src/App'
 import { useParams } from 'react-router';
 import { db } from '../API/Firebase';
@@ -13,9 +13,14 @@ const Chat = () => {
     const thisUser = useContext(FetchUser);
     const [user , setUser] = useState([]);
     const [chatInput ,setChatInput] = useState("");
-    const [chatData , setChatData] = useState([]);
-    const [mounted , setMounted] = useState(false);
-    const [snapChatData , setUserChatData] = useState([]);
+    // mounted Chat
+    const [mountedChatData , setMountedChatData] = useState([]);
+
+    useEffect(() => {
+        db.collection('chatlist').onSnapshot(snapshot => {
+            setMountedChatData(snapshot.docs.map( doc => doc.data() ))
+        })
+    },[])
 
 
     // 自分のデータ
@@ -34,19 +39,11 @@ const Chat = () => {
     useEffect( () => {
         const FetchAPI = async() => {
             setUser(await FetchUserlistData(id) );
-            setChatData(await FetchChatlistData() ); 
         }
         FetchAPI();
     },[id])
 
-    useEffect(() => {
-        
-        (async() => {
-            setUserChatData( await FetchChatlist()  );
-        })()
-    },[])
-    
-    
+
 
     const ChatData = async() => {
         try {
@@ -62,21 +59,7 @@ const Chat = () => {
         } catch (err) {
             console.log(`Error: ${JSON.stringify(err)}`)
         }
-        reFechAPI();
-    }
-
-
-
-
-    const reFechAPI = () => {
-        setMounted(!mounted);
-        if (!mounted) {
-            
-            ( async() => {
-                setChatData(await FetchChatlistData() )
-            })()
-
-        }
+        
     }
 
 
@@ -94,10 +77,9 @@ const Chat = () => {
     }
 
     // chatData
-    const sender = chatData.filter( f => f.fromUser === myUserID[0]).filter( t => t.toUser === talkToUserID[0] );
-    const receiver = chatData.filter( f => f.fromUser === talkToUserID[0]).filter( t => t.toUser === myUserID[0] );
+    const sender = mountedChatData.filter( f => f.fromUser === myUserID[0]).filter( t => t.toUser === talkToUserID[0] );
+    const receiver = mountedChatData.filter( f => f.fromUser === talkToUserID[0]).filter( t => t.toUser === myUserID[0] );
 
-    console.log(snapChatData)
 
     //スプレッド構文で結合
     const chatMessage =　[...sender , ...receiver];

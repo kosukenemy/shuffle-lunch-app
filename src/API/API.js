@@ -39,19 +39,20 @@ export const FetchChatlistData = async() => {
 
 
 /* --------
-　snapShot
+snapShot
 ----------*/
 
 export const FetchChatlist = () => {
     try {
         const snapShotData = [];
         
-        db.collection('chatlist').onSnapshot(querySnapshot => {
-            querySnapshot.forEach( doc => {
+        db.collection('chatlist').onSnapshot(snapshot => {
+            snapshot.forEach( doc => {
                 snapShotData.push({ ...doc.data() })
             })
         })
         return snapShotData;
+        
     
     } catch (error) {
         console.log('error' , error)
