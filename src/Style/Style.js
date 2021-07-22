@@ -113,15 +113,13 @@ export const LogOutButton = styled(BasicButton)`
     ダッシュボード コンポーネント
 ------------------------ */
 export const HeaderLogo = styled.div`
-    padding: 10px 30px;
-    height: 55px;
-    font-size: 30px;
+    display: flex;
+    align-items: center;
 `;
 
 export const HomeContainer = styled.div`
-    width: 100%;
     display: flex;
-    min-width: 800px;
+    justify-content: space-between;
     background: transparent;
 `;
 
@@ -129,6 +127,24 @@ export const SideMenu = styled.nav`
     width: 200px;
     border-right: solid 1px #e7e7e7;
     background: transparent;
+
+
+    &.onToggle {
+
+        width: 70px;
+    }
+`;
+
+export const ToggleButton = styled.button`
+    display: block;
+    margin: auto 0 0 0;
+    background: transparent;
+    padding: 0px 20px;
+
+    &.onToggle__button {
+        margin: 0 auto;
+        padding: 0px 0px;
+    }
 `;
 
 export const MenuBar = styled.ul`
@@ -143,29 +159,37 @@ export const MenuBar = styled.ul`
         align-self: center;
         line-height: 1.85;
 
+        
+
+
         &:hover {
             transition: all .3s ease;
             opacity: 1;
             transform:translateX(8px);
         }
     }
+    // toggle連動
+    .itemMenu {
+        &.onToggle__menu {
+            display: none;
+        }
+    }
 
 `;
 
 export const MainInner = styled.div`
-    width: 85%;
+    width: 100%;
     position: relative;
 `;
 
 export const MainInNavbar = styled.nav`
-    width: 100%;
-    max-width: 300px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 0 0 auto;
+    min-height: 56px;
     padding: 10px 30px;
     background: #fff;
+    position: sticky;
+    top:0;
+    left: 0;
+    border-bottom: solid 1px #e7e7e7;
 `;
 
 export const MainArea = styled.div`

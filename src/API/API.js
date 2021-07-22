@@ -2,6 +2,8 @@
 import { db } from './Firebase';
 
 
+
+
 /* --------
 ユーザー一覧
 ----------*/
@@ -37,24 +39,3 @@ export const FetchChatlistData = async() => {
     } catch(err) {  console.log(err , '接続できませんでした') }
 }
 
-
-/* --------
-snapShot
-----------*/
-
-export const FetchChatlist = () => {
-    try {
-        const snapShotData = [];
-        
-        db.collection('chatlist').onSnapshot(snapshot => {
-            snapshot.forEach( doc => {
-                snapShotData.push({ ...doc.data() })
-            })
-        })
-        return snapShotData;
-        
-    
-    } catch (error) {
-        console.log('error' , error)
-    }
-}

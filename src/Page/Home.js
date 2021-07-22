@@ -17,6 +17,8 @@ const Home = () => {
     const withLunchTime = userStatus.filter(w => w.lunchTime ).map(u => u.lunchTime );
     const withTalkTheme = userStatus.filter(w => w.talkTheme ).map(u => u.talkTheme );
 
+
+
     useEffect(() => {
         setUserStatus(thisUser);
         const FetchAPI = async() => {
@@ -34,6 +36,7 @@ const Home = () => {
     if( matchAllUsers === []) {
         setUserNotFind(!userNotFind);
     }
+
 
     return (
         <div>

@@ -16,12 +16,14 @@ const Chat = () => {
     // mounted Chat
     const [mountedChatData , setMountedChatData] = useState([]);
 
+
+
+
     useEffect(() => {
         db.collection('chatlist').onSnapshot(snapshot => {
             setMountedChatData(snapshot.docs.map( doc => doc.data() ))
         })
     },[])
-
 
     // 自分のデータ
     const matchUser = user.filter( u => u.id === id );
@@ -86,6 +88,12 @@ const Chat = () => {
     // 時間でソートさせる (投稿された順)
     const chatMessage_timeSort = chatMessage.sort((a , b) => ( (a.createdAt < b.createdAt) ? -1 : 1));
 
+
+    const nowTime = dayjs();
+    const nowTime_json = nowTime.format('YYYY/MM/DD/HH:mm')
+    console.log( 
+        "今",nowTime_json,
+    )
 
 
     return (

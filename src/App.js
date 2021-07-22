@@ -1,10 +1,12 @@
 import React, { useState, useEffect }  from 'react';
-import { BrowserRouter as Router , Switch, Route, Link } from 'react-router-dom';
-import { GlobalStyle, LoginArea,  LoginField, BasicButton, GradationType1, LogOutButton , HeaderLogo, MenuBar, HomeContainer, SideMenu, MainInner, MainInNavbar, MainArea, User, UserIcon , UserName } from '../src/Style/Style';
+import { BrowserRouter as Router , Switch, Route, Link, } from 'react-router-dom';
+import { GlobalStyle, LoginArea,  LoginField, BasicButton, GradationType1, LogOutButton , MenuBar, HomeContainer, SideMenu, ToggleButton, MainInner, MainInNavbar, MainArea, HeaderLogo, User, UserIcon , UserName } from '../src/Style/Style';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import MenuIcon from '@material-ui/icons/Menu';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 // firebase userlist
 import { FetchUserlistData } from '../src/API/API';
@@ -14,11 +16,11 @@ import UserPage from './Page/UserPage';
 import MyPage from './Page/MyPage';
 import ChatList from './Page/ChatList';
 import Chat from './Page/Chat';
+import Tooltip from '@material-ui/core/Tooltip';
 
 export const FetchUser = React.createContext();
 
 function App() {
-
 
     // ログイン方法 email / password
     const [inputEmail, setInputEmail] = useState(
@@ -26,21 +28,14 @@ function App() {
         ? ""
         : window.sessionStorage.getItem("mail")
     );
-
     const [inputpassword ,setInputpassword] = useState("");
-
-
-    // firebase userlist 関数
     const [getUserlist , setGetUserlist] = useState([{}]);
-
-
-    // ユーザーのログイン状態のステート,ステートはセッションストレージに保存
     const [loginState , SetLoginState ] = useState(
         window.sessionStorage.getItem("loginState") ? false : true
     );
-    // fire base
     const getUniqueStr = getUserlist.filter(this_user => this_user.email === inputEmail).map(m => m);
-
+    const [toggleOpenMenu , setToggleOpenMenu] = useState(false);
+    
 
     useEffect(() => {
         const FetchAPI = async() => {
@@ -48,7 +43,6 @@ function App() {
         }
         FetchAPI();
     },[])
-
 
 
     const saveToLocalStorage = () => {
@@ -64,11 +58,8 @@ function App() {
         setInputpassword(clear);
         window.sessionStorage.setItem("loginState", clear);
         window.sessionStorage.setItem("mail", clear);
-        window.location.reload();
-        
     }
     
-
     const handleSubmitToLogin = (e) => {
         e.preventDefault();
 
@@ -87,9 +78,14 @@ function App() {
             SetLoginState(loginState)
         } 
     }
+    
+    const handleMenuOpen = () => {
+        setToggleOpenMenu(!toggleOpenMenu)
+        console.log('aaaa')
+    }
 
 
-  return (
+    return (
     <>
     <Router>
     <Switch>
@@ -112,13 +108,48 @@ function App() {
                     <HomeContainer>
 
                         {/* SideMenu*/}
-                        <SideMenu>
-                                <HeaderLogo>logo</HeaderLogo>
+                        <SideMenu className={`${toggleOpenMenu && "onToggle"} `}>
+                                <div style={{padding:'23px 0px'}}>
+                                    <ToggleButton className={`${toggleOpenMenu && "onToggle__button"} `} onClick={handleMenuOpen}>
+                                        {toggleOpenMenu 
+                                            ? 
+                                            <Tooltip title="Open" arrow>
+                                                <ArrowBackIcon style={{ fontSize:'1.8rem'}} />
+                                            </Tooltip>
+                                            : 
+                                            <Tooltip title="Close" arrow>
+                                            <HeaderLogo>
+                                                <MenuIcon style={{ fontSize:'1.8rem'}} />
+                                            </HeaderLogo>
+                                            </Tooltip>
+                                        }
+                                    </ToggleButton>
+                                </div>
                                 <MenuBar>
-                                    <Link to="/"><li><DashboardIcon style={{marginRight:'5px'}} />ダッシュボード</li></Link>
-                                    <Link to="/myPage"><li><AccountCircleIcon style={{marginRight:'5px'}} />マイページ</li></Link>
-                                    <Link to="/userlist"><li><PeopleAltIcon style={{marginRight:'5px'}} />ユーザー一覧</li></Link>
-                                    <Link to="/chatlist"><li><ChatBubbleIcon style={{marginRight:'5px'}} />チャット</li></Link>
+                                    <Link to="/">
+                                        <li>
+                                            <DashboardIcon style={{marginRight:'5px'}} />
+                                            <span className={`itemMenu ${toggleOpenMenu && "onToggle__menu"} `}>ダッシュボード</span>
+                                        </li>
+                                    </Link>
+                                    <Link to="/myPage">
+                                        <li>
+                                            <AccountCircleIcon style={{marginRight:'5px'}} />
+                                            <span className={`itemMenu ${toggleOpenMenu && "onToggle__menu"} `}>マイページ</span>
+                                        </li>
+                                    </Link>
+                                    <Link to="/userlist">
+                                        <li>
+                                            <PeopleAltIcon style={{marginRight:'5px'}} />
+                                            <span className={`itemMenu ${toggleOpenMenu && "onToggle__menu"} `}>ユーザー一覧</span>
+                                        </li>
+                                    </Link>
+                                    <Link to="/chatlist">
+                                        <li>
+                                            <ChatBubbleIcon style={{marginRight:'5px'}} />
+                                            <span className={`itemMenu ${toggleOpenMenu && "onToggle__menu"} `}>チャット</span>
+                                        </li>
+                                    </Link>
                                 </MenuBar>
                         </SideMenu>
                         {/* SideMenu*/}
@@ -126,6 +157,7 @@ function App() {
                         {/* main*/}
                         <MainInner>
                             <MainInNavbar>  
+                                    <div className="inner" style={{display:'flex' , float:'right' , alignItems:'center' , }}>
                                         {getUserlist.filter(this_user => this_user.email === inputEmail).map((u ,idx) => (
                                             <div className="nav_inner" key={idx}>
                                                 <User>
@@ -140,6 +172,7 @@ function App() {
                                             </div>
                                     ) )}
                                     <LogOutButton style={GradationType1} onClick={handleLogOut}>ログアウト</LogOutButton>
+                                    </div>
                             </MainInNavbar>
 
                             {/* component*/}
