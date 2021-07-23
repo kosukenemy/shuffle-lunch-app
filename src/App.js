@@ -1,12 +1,13 @@
 import React, { useState, useEffect }  from 'react';
 import { BrowserRouter as Router , Switch, Route, Link, } from 'react-router-dom';
-import { GlobalStyle, LoginArea,  LoginField, BasicButton, GradationType1, LogOutButton , MenuBar, HomeContainer, SideMenu, ToggleButton, MainInner, MainInNavbar, MainArea, HeaderLogo, User, UserIcon , UserName } from '../src/Style/Style';
+import { GlobalStyle, LoginArea,  LoginField, BasicButton, GradationType1, MenuBar, HomeContainer, SideMenu, ToggleButton, MainInner, MainInNavbar, MainArea, HeaderLogo, User, UserIcon , UserName } from '../src/Style/Style';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import MenuIcon from '@material-ui/icons/Menu';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 // firebase userlist
 import { FetchUserlistData } from '../src/API/API';
@@ -81,6 +82,7 @@ function App() {
     const handleMenuOpen = () => {
         setToggleOpenMenu(!toggleOpenMenu)
     }
+
 
 
     return (
@@ -168,8 +170,11 @@ function App() {
                                                     </UserName>
                                                 </User>
                                             </div>
-                                    ) )}
-                                    <LogOutButton style={GradationType1} onClick={handleLogOut}>ログアウト</LogOutButton>
+                                        ))}
+                                        <button style={{background:'transparent', color:'#333' , marginLeft:'50px'}}　onClick={handleLogOut}>
+                                            <ExitToAppIcon />
+                                            <p style={{fontWeight:'600', fontSize:'9px', color:'#333'}}>ログアウト</p>
+                                        </button>
                                     </div>
                             </MainInNavbar>
 

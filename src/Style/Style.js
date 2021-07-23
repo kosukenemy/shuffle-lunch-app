@@ -29,6 +29,7 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         font-family: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
         background: #FFFDFD;
+        overflow-x: hidden;
     }
     input {
         outline: none;
@@ -51,6 +52,10 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
     ul { height:90vh;}
+    input,textarea {
+    -webkit-appearance: none;
+    outline: none;
+    }
 `;
 /* -----------
     テーマ
@@ -193,6 +198,7 @@ export const MainInNavbar = styled.nav`
     border-bottom: solid 1px #e7e7e7;
     z-index: 99;
 `;
+
 
 export const MainArea = styled.div`
     border-top:solid 1px #e7e7e7;
@@ -411,7 +417,7 @@ export const MessageInner = styled.div`
         margin: 0 0 0 1.5rem;
         width: 420px;
         height: 60px;
-        background:#0FB5FF;
+        background:#fff;
         padding:20px;
         text-align:left;
         color:#333333;
@@ -420,6 +426,7 @@ export const MessageInner = styled.div`
         border-radius:18px;
         -webkit-border-radius:18px;
         -moz-border-radius:18px;
+        box-shadow: 0px 0px 10px -5px #777777;
 
 
         &::after{
@@ -435,7 +442,7 @@ export const MessageInner = styled.div`
             border-left-width:10px;
             border-right-width:10px;
             margin-top: -10px;
-            border-right-color:#0FB5FF;
+            border-right-color:#fff;
             right:100%;
             top:27%;
         }
@@ -454,4 +461,22 @@ export const MessageInner = styled.div`
         text-align: right;
         font-size:12px;
     }
+`;
+
+export const ChatInputInner = styled.form`
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    padding: 10px 30px;
+`;
+
+export const ChatInputField = styled.textarea`
+    width: 100%;
+    resize: none;
+    min-height: 140px;
+`;
+
+export const ChatSubmitButton = styled(BasicButton)`
+    width: 200px;
+    margin:0;
 `;

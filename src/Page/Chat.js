@@ -4,7 +4,7 @@ import { FetchUserlistData } from '../API/API';
 import { FetchUser } from '../../src/App'
 import { useParams } from 'react-router';
 import { db } from '../API/Firebase';
-import { PageTitle , UserIcon , TitleIconProps, ChatMessageContainer, ChatMessage, MessageInner } from '../Style/Style';
+import { PageTitle , UserIcon , TitleIconProps, ChatMessageContainer, ChatMessage, MessageInner, ChatInputInner, ChatInputField, ChatSubmitButton, GradationType1 } from '../Style/Style';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 
 const Chat = () => {
@@ -97,7 +97,7 @@ const Chat = () => {
 
 
     return (
-        <div>
+        <div style={{position:'relative'}}>
             <PageTitle>
                 <><ChatBubbleIcon style={TitleIconProps} />
                     <span style={{fontSize:'12px', marginRight:'10px'}}>Talk with</span>
@@ -130,16 +130,16 @@ const Chat = () => {
                         })
                     }
                 </ChatMessageContainer>
-
-                <form>
-                    <textarea
-                    onChange={ (e) => setChatInput(e.target.value) } 
-                    type="text" 
-                    value={chatInput}
-                    ></textarea>
-                    <button type="submit" onClick={handleSubmit}>送信</button>
-                </form>
             </div>
+
+            <ChatInputInner>
+                <ChatInputField
+                onChange={ (e) => setChatInput(e.target.value) } 
+                type="text" 
+                value={chatInput}
+                ></ChatInputField>
+                <ChatSubmitButton style={GradationType1} type="submit" onClick={handleSubmit}>送信</ChatSubmitButton>
+            </ChatInputInner>
         </div>
     )
 }
