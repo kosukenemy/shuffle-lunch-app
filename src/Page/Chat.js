@@ -4,7 +4,7 @@ import { FetchUserlistData } from '../API/API';
 import { FetchUser } from '../../src/App'
 import { useParams } from 'react-router';
 import { db } from '../API/Firebase';
-import { PageTitle , UserIcon , TitleIconProps } from '../Style/Style';
+import { PageTitle , UserIcon , TitleIconProps, ChatMessageContainer, ChatMessage, MessageInner } from '../Style/Style';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 
 const Chat = () => {
@@ -104,32 +104,32 @@ const Chat = () => {
                     <span style={{fontSize:'18px'}}>{talkToUserName[0]}</span>
                 </>
             </PageTitle>
-            <div className="chatbox">
-                <div className="send">
-
-                    
+            <div>
+                <ChatMessageContainer>
                     {
                         chatMessage_timeSort.map( (u , idx) =>  {
                             const messageDate = dayjs(u.createdAt.toDate());
                             return (
-                                <div key={idx}>
+                                <ChatMessage key={idx}>
                                     <UserIcon src={u.image} alt={u.username}  />
-                                    {u.contents}
-                                    <p>
-                                    <time>
-                                        {new Date(u.createdAt.seconds * 1000).toLocaleDateString("ja")}
-                                        <span>
-                                            {messageDate.format('HH:mm')}
-                                        </span>
-                                    </time>
-                                    </p>
-                                </div>
+                                    <MessageInner>
+                                        <div className="balloon1-left">
+                                            <p style={{whiteSpace:'pre-wrap'}}>
+                                                {u.contents}
+                                            </p>
+                                        </div>
+                                        <time className="date">
+                                            {new Date(u.createdAt.seconds * 1000).toLocaleDateString("ja")}
+                                            <span style={{marginLeft:'5px'}}>
+                                                {messageDate.format('HH:mm')}
+                                            </span>
+                                        </time>
+                                    </MessageInner>
+                                </ChatMessage>
                             )
                         })
                     }
-
-
-                </div>
+                </ChatMessageContainer>
 
                 <form>
                     <textarea

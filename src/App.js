@@ -16,7 +16,6 @@ import UserPage from './Page/UserPage';
 import MyPage from './Page/MyPage';
 import ChatList from './Page/ChatList';
 import Chat from './Page/Chat';
-import Tooltip from '@material-ui/core/Tooltip';
 
 export const FetchUser = React.createContext();
 
@@ -81,7 +80,6 @@ function App() {
     
     const handleMenuOpen = () => {
         setToggleOpenMenu(!toggleOpenMenu)
-        console.log('aaaa')
     }
 
 
@@ -113,15 +111,15 @@ function App() {
                                     <ToggleButton className={`${toggleOpenMenu && "onToggle__button"} `} onClick={handleMenuOpen}>
                                         {toggleOpenMenu 
                                             ? 
-                                            <Tooltip title="Open" arrow>
-                                                <ArrowBackIcon style={{ fontSize:'1.8rem'}} />
-                                            </Tooltip>
+                                            <>
+                                            <ArrowBackIcon style={{ fontSize:'1.8rem'}} />
+                                            </>
                                             : 
-                                            <Tooltip title="Close" arrow>
+                                            <>
                                             <HeaderLogo>
                                                 <MenuIcon style={{ fontSize:'1.8rem'}} />
                                             </HeaderLogo>
-                                            </Tooltip>
+                                            </>
                                         }
                                     </ToggleButton>
                                 </div>

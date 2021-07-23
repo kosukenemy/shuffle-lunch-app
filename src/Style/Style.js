@@ -127,11 +127,12 @@ export const SideMenu = styled.nav`
     width: 200px;
     border-right: solid 1px #e7e7e7;
     background: transparent;
-
+    min-width: 200px;
 
     &.onToggle {
 
         width: 70px;
+        min-width: 70px;
     }
 `;
 
@@ -190,6 +191,7 @@ export const MainInNavbar = styled.nav`
     top:0;
     left: 0;
     border-bottom: solid 1px #e7e7e7;
+    z-index: 99;
 `;
 
 export const MainArea = styled.div`
@@ -371,4 +373,85 @@ export const ChatUserListContent = styled.div`
     text-align: left;
     font-weight: 600;
     .name { display:block;}
+`;
+
+/* ----------------------
+    チャット
+------------------------ */
+
+export const ChatMessageContainer = styled.div`
+
+`;
+
+export const ChatMessage = styled.div`
+    display: flex;
+    align-items: flex-start;
+    padding: 20px 0;
+
+/*     &:nth-child(even) {
+        flex-direction: row-reverse;
+
+        .balloon1-left {
+            margin: 0 1.5rem 0 0;
+            transform:scale(-1,1)
+        }
+        p {
+            transform:inherit;
+        }
+        .date {
+            text-align: left;
+        }
+    } */
+`;
+
+export const MessageInner = styled.div`
+
+    .balloon1-left{
+        position:relative;
+        margin: 0 0 0 1.5rem;
+        width: 420px;
+        height: 60px;
+        background:#0FB5FF;
+        padding:20px;
+        text-align:left;
+        color:#333333;
+        font-size:16px;
+        font-weight:bold;
+        border-radius:18px;
+        -webkit-border-radius:18px;
+        -moz-border-radius:18px;
+
+
+        &::after{
+            border: solid transparent;
+            content:'';
+            height:0;
+            width:0;
+            pointer-events:none;
+            position:absolute;
+            border-color: rgba(15, 181, 255, 0);
+            border-top-width:10px;
+            border-bottom-width:10px;
+            border-left-width:10px;
+            border-right-width:10px;
+            margin-top: -10px;
+            border-right-color:#0FB5FF;
+            right:100%;
+            top:27%;
+        }
+    }
+
+
+
+
+    .balloon1-left p {
+        margin: 0;
+        padding: 0;
+    }
+
+    .date {
+        display: block;
+        text-align: right;
+        font-size:12px;
+    }
 `;
