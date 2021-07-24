@@ -28,6 +28,7 @@ const Userlist = () => {
                         <UserName style={{padding:'0'}}>
                             <span className="il_team">{user.team}</span>
                             <span className="il_name">{user.username}</span>
+                            <span className="il_intro">{user.introduction}</span>
                         </UserName>
                     </UserInner>
                 </div>

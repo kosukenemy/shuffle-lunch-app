@@ -6,7 +6,7 @@ const HotPapper = () => {
     const [shopdata , setShopData] = useState([]);
 
     useEffect(() => {
-        axios.get(`/hotpepper/gourmet/v1/?key=${process.env.REACT_APP_HOTPEPPAR_APIKEY}&keyword=%E5%85%AD%E6%9C%AC%E6%9C%A8&keyword=%E4%B9%83%E6%9C%A8%E5%9D%82&format=json`)
+        axios.get(`/hotpepper/gourmet/v1/?key=${process.env.REACT_APP_HOTPEPPAR_APIKEY}&middle_area=Y045&count=100&format=json`)
         .then( res => {
             const datas = res.data;
 
@@ -80,13 +80,13 @@ const HotPapper = () => {
                             <p className="shopName">
                                 {shop.name}
                             </p>
-                            <p>
+                            <p className="shopDetail">
                                 {shop.catch}
                             </p>
-                            <p>
+                            <p className="shopAdress">
                                 {shop.address}
                             </p>
-                            <p>
+                            <p className="shopAccess">
                                 {shop.access}
                             </p>
                             <p>

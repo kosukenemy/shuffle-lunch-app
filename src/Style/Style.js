@@ -258,7 +258,7 @@ export const UserName = styled.span`
     .team {
         display: inline-block;
         font-size: 10px;
-        color:#3334;
+        color:#717375;
     }
 
     &:hover { text-decoration:underline; cursor: pointer; }
@@ -375,7 +375,13 @@ export const UserInner = styled.div`
     .il_team {
         display: inline-block;
         font-size: 10px;
-        color:#3334;
+        color:#717375;
+        padding: 0;
+    }
+    .il_intro {
+        display: inline-block;
+        font-size: 10px;
+        color:#717375;
         padding: 0;
     }
 `;
@@ -528,27 +534,45 @@ export const ShopThumbnail = styled.div`
         
     }
 
-    .shopName {
-        text-align: left;
-        font-size: 12px;
-        font-weight: 600;
-    }
+
 `;
 
 export const ShopContent = styled.div`
     width: 100%;
     padding: 10px 20px;
     position: relative;
+    text-align: left;
 
     .button__inner {
         position:absolute;
         bottom: 20px;
         right: 20px;
     }
+
+    .shopName {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 auto 10px;
+        letter-spacing: 0.02rem;
+    }
+    .shopDetail {
+        margin: 0 auto 20px;
+        letter-spacing: 0.02rem;
+    }
+    .shopAdress , .shopAccess {
+        font-size: 14px;
+        margin: 0 auto 5px;
+        letter-spacing: 0.02rem;
+        color: #717375;
+    }
+    .shopAccess {
+        margin: 0 auto 10px;
+    }
 `;
 
 export const MiniButton = styled.a`
-    background: gray;
+    background: #777777;
+    color: #fff;
     display: block;
     width: 100px;
     margin: 3px;
@@ -558,4 +582,5 @@ export const MiniButton = styled.a`
     font-weight: 600;
     border-radius: 8px;
     margin: 0 0 0 auto;
+    box-shadow: 0px 0px 10px -5px #777777;
 `;
