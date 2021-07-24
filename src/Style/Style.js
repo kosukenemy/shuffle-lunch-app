@@ -315,7 +315,7 @@ export const PagePrimaryText = styled.p`
     line-height: 1.85;
     letter-spacing: 0.02em;
     font-weight: 600;
-    color: rgb(91, 134, 229); /* #616161 */
+    color: rgb(91, 134, 229);
     margin: 0 auto 17px;
 `;
 
@@ -506,28 +506,56 @@ export const ChatSubmitButton = styled(BasicButton)`
 ------------------------ */
 export const ShopList = styled.div`
     display: flex;
-    padding: 20px 0px;
+    margin: 30px 0px;
+    border: solid 1px #e7e7e7;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 1300px;
+    min-width: 700px;
 `;
 
 export const ShopThumbnail = styled.div`
-    width: 150px;
+    width: 270px;
+
+
 
     img {
-        width:150px;
-        height: 150px;
+        width:100%;
+        height: 190px;
+        min-height: 220px;
         object-fit: cover;
         vertical-align: top;
-        border-radius: 10%;
+        
     }
 
     .shopName {
-        text-align: center;
+        text-align: left;
         font-size: 12px;
         font-weight: 600;
     }
 `;
 
 export const ShopContent = styled.div`
-    width: 500px;
-    padding: 0px 20px;
+    width: 100%;
+    padding: 10px 20px;
+    position: relative;
+
+    .button__inner {
+        position:absolute;
+        bottom: 20px;
+        right: 20px;
+    }
+`;
+
+export const MiniButton = styled.a`
+    background: gray;
+    display: block;
+    width: 100px;
+    margin: 3px;
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    margin: 0 0 0 auto;
 `;

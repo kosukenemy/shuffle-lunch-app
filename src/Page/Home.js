@@ -5,6 +5,7 @@ import { FetchUserlistData } from '../API/API';
 import HotPapper from '../Components/HotPapper'
 import { PageTitle, PageInnerWrapper, TitleIconProps } from '../Style/Style';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import RestaurantIcon from '@material-ui/icons/Restaurant';
 
 
 
@@ -49,7 +50,7 @@ const Home = () => {
                 <PageInnerWrapper>
                     
                     <PageTitle style={{fontSize:'20px'}}>  
-                        <><DashboardIcon style={TitleIconProps} /><span>六本木周辺のお店</span></>
+                        <><RestaurantIcon style={TitleIconProps} /><span>六本木周辺のお店</span></>
                     </PageTitle>
                     {/* ホットペッパー */}
                     <HotPapper />

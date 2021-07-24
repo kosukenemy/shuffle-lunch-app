@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { ShopList, ShopThumbnail, ShopContent } from '../Style/Style'
+import { ShopList, ShopThumbnail, ShopContent, MiniButton } from '../Style/Style'
 
 const HotPapper = () => {
     const [shopdata , setShopData] = useState([]);
@@ -73,14 +73,13 @@ const HotPapper = () => {
                     <ShopList key={idx}>
                         
                         <ShopThumbnail>
-                            <img src={shop.photo.pc.m} alt={shop.name} />
-                            <p className="shopName">
-                                {shop.name}
-                            </p>
+                            <img src={shop.photo.pc.l} alt={shop.name} />
                         </ShopThumbnail>
                         <ShopContent>
 
-
+                            <p className="shopName">
+                                {shop.name}
+                            </p>
                             <p>
                                 {shop.catch}
                             </p>
@@ -93,8 +92,9 @@ const HotPapper = () => {
                             <p>
                                 {shop.budget.name}
                             </p>
-                            <a href={shop.urls.pc} target="_blank" rel="noopener noreferrer">詳細</a>
-                            <a href={shop.coupon_urls.pc} target="_blank" rel="noopener noreferrer">クーポン</a>
+                            <div className="button__inner">
+                                <MiniButton href={shop.urls.pc} target="_blank" rel="noopener noreferrer">詳細</MiniButton>
+                            </div>
                         </ShopContent>
 
                     </ShopList>
