@@ -11,6 +11,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 // firebase userlist
 import { FetchUserlistData } from '../src/API/API';
+import ScrollToTop from './Components/ScrollToTop';
 import Home from './Page/Home';
 import Userlist from './Page/Userlist';
 import UserPage from './Page/UserPage';
@@ -89,6 +90,7 @@ function App() {
     <>
     <Router>
     <Switch>
+        <ScrollToTop>
         <FetchUser.Provider value={getUniqueStr}>
             <div style={{position:'relative'}}>
             <GlobalStyle />
@@ -199,6 +201,7 @@ function App() {
                 }
             </div>
         </FetchUser.Provider>
+        </ScrollToTop>
     </Switch>
     </Router>
     </>
