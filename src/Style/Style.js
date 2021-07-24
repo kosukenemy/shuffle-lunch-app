@@ -11,7 +11,7 @@ export const media = {
     }
     `,
         mid: (...args) => css`
-        @media (min-width: 1025px) {
+        @media (max-width: 1025px) {
             ${ css(...args)}
         }
         `,
@@ -133,6 +133,10 @@ export const SideMenu = styled.nav`
     border-right: solid 1px #e7e7e7;
     background: transparent;
     min-width: 200px;
+    ${media.mid`
+        width: 70px;
+        min-width: 70px;
+    `}
 
     &.onToggle {
 
@@ -146,6 +150,10 @@ export const ToggleButton = styled.button`
     margin: auto 0 0 0;
     background: transparent;
     padding: 0px 20px;
+    ${media.mid`
+        margin: 0 auto;
+        padding: 0px 0px;
+    `}
 
     &.onToggle__button {
         margin: 0 auto;
@@ -165,7 +173,7 @@ export const MenuBar = styled.ul`
         align-self: center;
         line-height: 1.85;
 
-        
+            
 
 
         &:hover {
@@ -176,6 +184,9 @@ export const MenuBar = styled.ul`
     }
     // toggle連動
     .itemMenu {
+        ${media.mid`
+            display: none;
+        `}
         &.onToggle__menu {
             display: none;
         }
