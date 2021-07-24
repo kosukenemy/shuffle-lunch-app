@@ -109,6 +109,7 @@ function App() {
 
                         {/* SideMenu*/}
                         <SideMenu className={`${toggleOpenMenu && "onToggle"} `}>
+                                <div style={{position:'sticky', top:'0', left:'0'}}>
                                 <div style={{padding:'23px 0px'}}>
                                     <ToggleButton className={`${toggleOpenMenu && "onToggle__button"} `} onClick={handleMenuOpen}>
                                         {toggleOpenMenu 
@@ -119,6 +120,7 @@ function App() {
                                             : 
                                             <>
                                             <HeaderLogo>
+                                                <h1 className="logo">shuffle 🍔</h1>
                                                 <MenuIcon style={{ fontSize:'1.8rem'}} />
                                             </HeaderLogo>
                                             </>
@@ -151,6 +153,7 @@ function App() {
                                         </li>
                                     </Link>
                                 </MenuBar>
+                                </div>
                         </SideMenu>
                         {/* SideMenu*/}
 

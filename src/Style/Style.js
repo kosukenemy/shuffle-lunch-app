@@ -120,12 +120,20 @@ export const LogOutButton = styled(BasicButton)`
 export const HeaderLogo = styled.div`
     display: flex;
     align-items: center;
+
+    .logo {
+        padding-right: 30px;
+        ${media.mid`
+            display: none;
+        `}
+    }
 `;
 
 export const HomeContainer = styled.div`
     display: flex;
     justify-content: space-between;
     background: transparent;
+    position: relative;
 `;
 
 export const SideMenu = styled.nav`
@@ -133,6 +141,7 @@ export const SideMenu = styled.nav`
     border-right: solid 1px #e7e7e7;
     background: transparent;
     min-width: 200px;
+    position: relative;
     ${media.mid`
         width: 70px;
         min-width: 70px;
@@ -147,7 +156,7 @@ export const SideMenu = styled.nav`
 
 export const ToggleButton = styled.button`
     display: block;
-    margin: auto 0 0 0;
+    margin: 0;
     background: transparent;
     padding: 0px 20px;
     ${media.mid`
