@@ -1,52 +1,14 @@
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { db } from './Firebase';
+import { ShopList, ShopThumbnail, ShopContent } from '../Style/Style'
 
+const HotPapper = () => {
+    const [shopdata , setShopData] = useState([]);
 
-/* --------
-ユーザー一覧
-----------*/
-// firebase 
-export const FetchUserlistData = async() => {
-    try {
-        const firebaseData = [];
-
-        await db.collection('userlist').get().then(querySnapshot => {
-            querySnapshot.forEach(doc => {
-                firebaseData.push(doc.data())    
-            })
-        })
-        return firebaseData;
-        
-    } catch(err) {  console.log(err , '接続できませんでした') }
-}
-
-/* --------
-チャット一覧
-----------*/
-export const FetchChatlistData = async() => {
-    try {
-        const firebaseData = [];
-
-        await db.collection('chatlist').get().then(querySnapshot => {
-            querySnapshot.forEach(doc => {
-                firebaseData.push(doc.data())    
-            })
-        })
-        return firebaseData ;
-        
-    } catch(err) {  console.log(err , '接続できませんでした') }
-}
-
-
-/* --------
-ホットペッパー
-----------*/
-export const FetchHotPepparAPI = async() => {
-    try {
+    useEffect(() => {
         axios.get(`/hotpepper/gourmet/v1/?key=${process.env.REACT_APP_HOTPEPPAR_APIKEY}&keyword=%E5%85%AD%E6%9C%AC%E6%9C%A8&keyword=%E4%B9%83%E6%9C%A8%E5%9D%82&format=json`)
         .then( res => {
-            const datas = res.data
-            console.log(datas)
+            const datas = res.data;
 
             const modifiedData = datas['results'].shop.map(m => ({
                 access : m['access'],
@@ -97,10 +59,49 @@ export const FetchHotPepparAPI = async() => {
                 wedding :m['wedding'],
                 wifi : m['wifi']
             }))
-            return modifiedData;
+            setShopData(modifiedData)
         })
+    },[])
+
+    console.log(shopdata)
 
 
+    return (
+        <div>
+            {
+                shopdata.map((shop , idx) => (
+                    <ShopList key={idx}>
+                        
+                        <ShopThumbnail>
+                            <img src={shop.photo.pc.m} alt={shop.name} />
+                            <p className="shopName">
+                                {shop.name}
+                            </p>
+                        </ShopThumbnail>
+                        <ShopContent>
 
-    } catch(err) { console.log(err , '接続できませんでした') }
+
+                            <p>
+                                {shop.catch}
+                            </p>
+                            <p>
+                                {shop.address}
+                            </p>
+                            <p>
+                                {shop.access}
+                            </p>
+                            <p>
+                                {shop.budget.name}
+                            </p>
+                            <a href={shop.urls.pc} target="_blank" rel="noopener noreferrer">詳細</a>
+                            <a href={shop.coupon_urls.pc} target="_blank" rel="noopener noreferrer">クーポン</a>
+                        </ShopContent>
+
+                    </ShopList>
+                ))
+            }
+        </div>
+    )
 }
+
+export default HotPapper

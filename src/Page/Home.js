@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FetchUser } from '../App';
 import { FetchUserlistData } from '../API/API';
+import HotPapper from '../Components/HotPapper'
 import { PageTitle, PageInnerWrapper, TitleIconProps } from '../Style/Style';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 
@@ -16,6 +17,7 @@ const Home = () => {
     const JoinStatus = userStatus.filter(w => w.lunchState ).map(u => u.lunchState );
     const withLunchTime = userStatus.filter(w => w.lunchTime ).map(u => u.lunchTime );
     const withTalkTheme = userStatus.filter(w => w.talkTheme ).map(u => u.talkTheme );
+
 
 
 
@@ -46,7 +48,13 @@ const Home = () => {
                 
                 <PageInnerWrapper>
                     
-                    <Link to="/myPage"><li>ステータスを変更する</li></Link>
+                    <PageTitle style={{fontSize:'20px'}}>  
+                        <><DashboardIcon style={TitleIconProps} /><span>六本木周辺のお店</span></>
+                    </PageTitle>
+                    {/* ホットペッパー */}
+                    <HotPapper />
+
+{/*                     <Link to="/myPage"><li>ステータスを変更する</li></Link>
                     <span>あなたのステータス</span>
                     <div>
                         {userStatus.slice(0,1).map((u , idx) => (
@@ -56,7 +64,7 @@ const Home = () => {
                                 <p>{u.talkTheme}</p>
                             </div>
                         ))}
-                    </div>
+                    </div> */}
                 </PageInnerWrapper>
                 <PageInnerWrapper style={{margin:'30px auto 0'}}>
                     <h2>あなたとマッチしたユーザー</h2>

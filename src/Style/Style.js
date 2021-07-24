@@ -215,7 +215,7 @@ export const MainArea = styled.div`
     border-top:solid 1px #e7e7e7;
     padding: 20px 30px;
     background: #F5F5F5;
-    height: 100vh;
+    min-height: 100vh;
 `;
 
 /* ----------------------
@@ -490,4 +490,35 @@ export const ChatInputField = styled.textarea`
 export const ChatSubmitButton = styled(BasicButton)`
     width: 200px;
     margin:0;
+`;
+
+/* ----------------------
+    周辺のお店
+------------------------ */
+export const ShopList = styled.div`
+    display: flex;
+    padding: 20px 0px;
+`;
+
+export const ShopThumbnail = styled.div`
+    width: 150px;
+
+    img {
+        width:150px;
+        height: 150px;
+        object-fit: cover;
+        vertical-align: top;
+        border-radius: 10%;
+    }
+
+    .shopName {
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+    }
+`;
+
+export const ShopContent = styled.div`
+    width: 500px;
+    padding: 0px 20px;
 `;
