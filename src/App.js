@@ -19,6 +19,9 @@ import MyPage from './Page/MyPage';
 import ChatList from './Page/ChatList';
 import Chat from './Page/Chat';
 
+// テストユーザー用 ポップアップ
+import TestUserPopUp from './Components/TestUserPopUp';
+
 export const FetchUser = React.createContext();
 
 function App() {
@@ -70,7 +73,6 @@ function App() {
         if(getUserlist.map(m => (m.email)).includes(inputEmail)) {
             if(getUserlist.map(m => (m.password)).includes(inputpassword)) {
 
-                console.log(inputEmail, inputpassword )
                 SetLoginState(!loginState)
                 saveToLocalStorage();
             }
@@ -98,12 +100,19 @@ function App() {
             <GlobalStyle />
             {/* ログイン画面 ----------------------------------------*/}
                 {loginState &&
+                    <>
                     <LoginArea className="login_form" onSubmit={ (e) => handleSubmitToLogin(e) }>
-                        <h1 className="login-title">ログイン</h1>                      
+                        <h1 className="login-title">ログイン</h1>                    
                         <LoginField type="email" placeholder="メールアドレス" value={inputEmail} onChange={ (e) => setInputEmail(e.target.value) } />
                         <LoginField type="password" placeholder="パスワード" value={inputpassword} onChange={ (e) => setInputpassword(e.target.value) } />
                         <BasicButton style={GradationType1} type="submit">ログイン</BasicButton>
+
+                        {/* テストユーザー用 ポップアップ --------------*/}
+                        <TestUserPopUp />
+                        {/* テストユーザー用 ポップアップ --------------*/}
+
                     </LoginArea>
+                    </>
                 }
 
 

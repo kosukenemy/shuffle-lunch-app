@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FetchUser } from '../App';
 import { FetchUserlistData } from '../API/API';
 import HotPapper from '../Components/HotPapper'
-import { PageTitle, PageInnerWrapper, TitleIconProps } from '../Style/Style';
+import { PageTitle, PageInnerWrapper, TitleIconProps , MiniButton } from '../Style/Style';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
 
@@ -34,6 +34,9 @@ const Home = () => {
 
                 <PageInnerWrapper style={{margin:'0px auto 30px'}}>
                     条件がマッチしたユーザーをランチに誘ってみよう！
+{/*                     <Link to="/chatlist">
+                        <MiniButton>チャット</MiniButton>
+                    </Link> */}
                 </PageInnerWrapper>
                 
                 <PageInnerWrapper>
