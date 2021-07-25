@@ -59,6 +59,8 @@ function App() {
         setInputpassword(clear);
         window.sessionStorage.setItem("loginState", clear);
         window.sessionStorage.setItem("mail", clear);
+        window.location.reload();
+        window.location.push('/')
     }
     
     const handleSubmitToLogin = (e) => {
@@ -122,7 +124,7 @@ function App() {
                                             : 
                                             <>
                                             <HeaderLogo>
-                                                <h1 className="logo">しゃふラン🍴</h1>
+                                                <h1 className="logo">しゃふラン🍽</h1>
                                                 <MenuIcon style={{ fontSize:'1.8rem'}} />
                                             </HeaderLogo>
                                             </>
