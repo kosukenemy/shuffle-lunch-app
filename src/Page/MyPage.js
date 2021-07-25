@@ -145,7 +145,6 @@ const MyPage = () => {
         );
     };
 
-    
 
     return (
         <div>

@@ -189,8 +189,10 @@ function App({history}) {
                                             </div>
                                         ))}
                                         <button style={{background:'transparent', color:'#333' , marginLeft:'50px'}}　onClick={handleLogOut}>
-                                            <ExitToAppIcon />
-                                            <p style={{fontWeight:'600', fontSize:'9px', color:'#333'}}>ログアウト</p>
+                                            <Link to="/">
+                                                <ExitToAppIcon />
+                                                <p style={{fontWeight:'600', fontSize:'9px', color:'#333'}}>ログアウト</p>
+                                            </Link>
                                         </button>
                                     </div>
                             </MainInNavbar>
