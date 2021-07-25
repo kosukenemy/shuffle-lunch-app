@@ -122,7 +122,7 @@ function App() {
                                             : 
                                             <>
                                             <HeaderLogo>
-                                                <h1 className="logo">shuffle 🍔</h1>
+                                                <h1 className="logo">しゃふラン🍴</h1>
                                                 <MenuIcon style={{ fontSize:'1.8rem'}} />
                                             </HeaderLogo>
                                             </>

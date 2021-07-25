@@ -52,10 +52,10 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
     ul { height:90vh;}
-    input,textarea {
+/*     input,textarea {
     -webkit-appearance: none;
     outline: none;
-    }
+    } */
 `;
 /* -----------
     テーマ
@@ -122,7 +122,10 @@ export const HeaderLogo = styled.div`
     align-items: center;
 
     .logo {
-        padding-right: 30px;
+        padding-right: 20px;
+        font-family: 'Otomanopee One', sans-serif;
+        letter-spacing: 0.02rem;
+        font-size: 22px;
         ${media.mid`
             display: none;
         `}

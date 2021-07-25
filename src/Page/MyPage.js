@@ -4,7 +4,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { db } from '../API/Firebase';
 import { storage } from '../API/Firebase'
 import { PageTitle, EditButton, PageInnerWrapper, PageContentInner, PagePrimaryText, PagePrimaryContent, MyPageUserIcon, PageColumn, PageRow, TitleIconProps, MyPageInputEdit } from '../Style/Style';
-
+import PublishIcon from '@material-ui/icons/Publish';
 
 
 const MyPage = () => {
@@ -113,18 +113,15 @@ const MyPage = () => {
         event.preventDefault();
         setError("");
         if (image === "") {
-            console.log("ファイルが選択されていません");
+            alert("ファイルが選択されていません");
             setError("ファイルが選択されていません");
         return;
         }
         // アップロード処理
-        console.log("アップロード処理");
         const storageRef = storage.ref("images/userProfile/"); //どのフォルダの配下に入れるかを設定
         const imagesRef = storageRef.child(image.name); //ファイル名
     
-        console.log("ファイルをアップする行為");
         const upLoadTask = imagesRef.put(image);
-        console.log("タスク実行前");
     
         upLoadTask.on(
             "state_changed",
@@ -215,7 +212,7 @@ const MyPage = () => {
                                         <PagePrimaryContent>
                                             <span>画像</span>
                                             <input type="file" onChange={handleImage} />
-                                            <button onClick={onSubmit}>アップロード</button>
+                                            <button style={{display:'inline-flex' , alignItems:'center' , background:'transparent'}} onClick={onSubmit}>アップロード<PublishIcon /></button>
                                         </PagePrimaryContent>
                                         <PagePrimaryContent>
                                             <span>所属</span>
