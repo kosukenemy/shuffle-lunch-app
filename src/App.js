@@ -24,7 +24,7 @@ import TestUserPopUp from './Components/TestUserPopUp';
 
 export const FetchUser = React.createContext();
 
-function App() {
+function App({history}) {
 
     // ログイン方法 email / password
     const [inputEmail, setInputEmail] = useState(
@@ -64,6 +64,7 @@ function App() {
         window.sessionStorage.setItem("mail", clear);
         window.location.reload();
         window.location.push('/')
+        
     }
     
     const handleSubmitToLogin = (e) => {
@@ -121,7 +122,7 @@ function App() {
                     <HomeContainer>
 
                         {/* SideMenu*/}
-                        <SideMenu className={`${toggleOpenMenu && "onToggle"} `}>
+                        <SideMenu className={`${toggleOpenMenu && "onToggle"} `} style={GradationType1}>
                                 <div style={{position:'sticky', top:'0', left:'0'}}>
                                 <div style={{padding:'23px 0px'}}>
                                     <ToggleButton className={`${toggleOpenMenu && "onToggle__button"} `} onClick={handleMenuOpen}>
@@ -133,7 +134,7 @@ function App() {
                                             : 
                                             <>
                                             <HeaderLogo>
-                                                <h1 className="logo">しゃふラン🍽</h1>
+                                                <h1 className="logo">しゃふラン🍴</h1>
                                                 <MenuIcon style={{ fontSize:'1.8rem'}} />
                                             </HeaderLogo>
                                             </>

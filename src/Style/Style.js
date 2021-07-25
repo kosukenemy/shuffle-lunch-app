@@ -61,8 +61,9 @@ export const GlobalStyle = createGlobalStyle`
     テーマ
 ------------- */
 export const GradationType1 = {
-    backgroundImage : "linear-gradient(to right, rgb(54, 209, 220) 0%, rgb(91, 134, 229) 51%, rgb(54, 209, 220) 100%)",
-    color : "#fff",
+    backgroundImage : "linear-gradient(112deg, #fa0, #f28c00)",
+    /* background: "#FF7C5C", */
+    color : "#F7F7F7",
     fontWeight : "bold"
 }
 
@@ -120,6 +121,7 @@ export const LogOutButton = styled(BasicButton)`
 export const HeaderLogo = styled.div`
     display: flex;
     align-items: center;
+    color: #fff;
 
     .logo {
         padding-right: 20px;
@@ -162,6 +164,7 @@ export const ToggleButton = styled.button`
     margin: 0;
     background: transparent;
     padding: 0px 20px;
+    color: #fff;
     ${media.mid`
         margin: 0 auto;
         padding: 0px 0px;
@@ -178,12 +181,12 @@ export const MenuBar = styled.ul`
     li {
         padding: 20px 20px;
         font-size: 14px;
-        opacity: 0.8;
         font-weight: 600;
         cursor: pointer;
         display: flex;
         align-self: center;
         line-height: 1.85;
+        color: #fff;
 
             
 
@@ -208,6 +211,7 @@ export const MenuBar = styled.ul`
 
 export const MainInner = styled.div`
     width: 100%;
+    min-width: 1000px;
     position: relative;
 `;
 
@@ -318,7 +322,7 @@ export const PagePrimaryText = styled.p`
     line-height: 1.85;
     letter-spacing: 0.02em;
     font-weight: 600;
-    color: rgb(91, 134, 229);
+    color: #333;
     margin: 0 auto 17px;
 `;
 
@@ -574,7 +578,6 @@ export const ShopContent = styled.div`
 `;
 
 export const MiniButton = styled.a`
-    background: #777777;
     color: #fff;
     display: block;
     width: 100px;
