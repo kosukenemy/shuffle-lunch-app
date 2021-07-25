@@ -46,7 +46,10 @@ const MyPage = () => {
         e.preventDefault();
         setContentEdit(!contentEdit)
         EditedData();
-        console.log(patchData)
+        
+        if ( lunchJoin === "不参加" ){
+            alert('こちらの条件でマッチしたユーザーとのチャットが出来なくなります。データは失われません。再度条件がマッチした際に表示されます')
+        }
     }
     
 
