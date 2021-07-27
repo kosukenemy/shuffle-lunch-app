@@ -2,7 +2,7 @@ import React, { useContext ,useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FetchUser } from '../App';
 import { FetchUserlistData } from '../API/API';
-import { PageTitle, TitleIconProps, UserIcon, ChatUserList, ChatUserListContent } from '../Style/Style';
+import { PageTitle, TitleIconProps, UserIcon, ChatUserList, ChatUserListContent, EditButton, PrimaryGray } from '../Style/Style';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 
 
@@ -52,7 +52,7 @@ const ChatList = () => {
                         </div>
                         <div>
                             <Link to={`/chat/${user.id}`}>
-                                <button>チャット</button>
+                                <EditButton style={PrimaryGray}>チャット</EditButton>
                             </Link>
                         </div>
                     </ChatUserList>

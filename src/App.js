@@ -1,7 +1,8 @@
 import React, { useState, useEffect }  from 'react';
 import { BrowserRouter as Router , Switch, Route, Link, } from 'react-router-dom';
-import { GlobalStyle, LoginArea,  LoginField, BasicButton, GradationType1, MenuBar, HomeContainer, SideMenu, ToggleButton, MainInner, MainInNavbar, MainArea, HeaderLogo, User, UserIcon , UserName } from '../src/Style/Style';
-import DashboardIcon from '@material-ui/icons/Dashboard';
+import { GlobalStyle, LoginArea,  LoginField, BasicButton, ThemeColor, MenuBar, HomeContainer, SideMenu, ToggleButton, MainInner, MainInNavbar, MainArea, HeaderLogo, User, UserIcon , UserName } from '../src/Style/Style';
+
+import RestaurantIcon from '@material-ui/icons/Restaurant';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
@@ -106,7 +107,7 @@ function App({history}) {
                         <h1 className="login-title">ログイン</h1>                    
                         <LoginField type="email" placeholder="メールアドレス" value={inputEmail} onChange={ (e) => setInputEmail(e.target.value) } />
                         <LoginField type="password" placeholder="パスワード" value={inputpassword} onChange={ (e) => setInputpassword(e.target.value) } />
-                        <BasicButton style={GradationType1} type="submit">ログイン</BasicButton>
+                        <BasicButton style={ThemeColor} type="submit">ログイン</BasicButton>
 
                         {/* テストユーザー用 ポップアップ --------------*/}
                         <TestUserPopUp />
@@ -122,7 +123,7 @@ function App({history}) {
                     <HomeContainer>
 
                         {/* SideMenu*/}
-                        <SideMenu className={`${toggleOpenMenu && "onToggle"} `} style={GradationType1}>
+                        <SideMenu className={`${toggleOpenMenu && "onToggle"} `} style={ThemeColor}>
                                 <div style={{position:'sticky', top:'0', left:'0'}}>
                                 <div style={{padding:'23px 0px'}}>
                                     <ToggleButton className={`${toggleOpenMenu && "onToggle__button"} `} onClick={handleMenuOpen}>
@@ -144,8 +145,8 @@ function App({history}) {
                                 <MenuBar>
                                     <Link to="/">
                                         <li>
-                                            <DashboardIcon style={{marginRight:'5px'}} />
-                                            <span className={`itemMenu ${toggleOpenMenu && "onToggle__menu"} `}>ダッシュボード</span>
+                                            <RestaurantIcon style={{marginRight:'5px'}} />
+                                            <span className={`itemMenu ${toggleOpenMenu && "onToggle__menu"} `}>お店を探す</span>
                                         </li>
                                     </Link>
                                     <Link to="/myPage">
@@ -188,10 +189,10 @@ function App({history}) {
                                                 </User>
                                             </div>
                                         ))}
-                                        <button style={{background:'transparent', color:'#333' , marginLeft:'50px'}}　onClick={handleLogOut}>
+                                        <button style={{background:'transparent' , marginLeft:'50px'}}　onClick={handleLogOut}>
                                             <Link to="/">
                                                 <ExitToAppIcon />
-                                                <p style={{fontWeight:'600', fontSize:'9px', color:'#333'}}>ログアウト</p>
+                                                <p style={{fontWeight:'600', fontSize:'9px'}}>ログアウト</p>
                                             </Link>
                                         </button>
                                     </div>

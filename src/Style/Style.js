@@ -30,6 +30,7 @@ export const GlobalStyle = createGlobalStyle`
         font-family: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
         background: #FFFDFD;
         overflow-x: hidden;
+        color: #475569;
     }
     input {
         outline: none;
@@ -40,8 +41,9 @@ export const GlobalStyle = createGlobalStyle`
         outline: none;
         padding: 0;
         appearance: none;
+        color: #475569;
     }
-    a { color:#333;}
+    a { color:#475569;}
     img {
         width: 100%;
     }
@@ -52,11 +54,11 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
     ul { height:90vh;}
-/*     input,textarea {
-    -webkit-appearance: none;
-    outline: none;
-    } */
 `;
+
+
+
+
 /* -----------
     テーマ
 ------------- */
@@ -65,6 +67,24 @@ export const GradationType1 = {
     /* background: "#FF7C5C", */
     color : "#F7F7F7",
     fontWeight : "bold"
+}
+
+export const ThemeColor = {
+    background: "#334155",
+}
+
+export const PrimaryGray = {
+    background: "#9CA3AF",
+    color: "#fff"
+}
+
+export const PrimaryRed = {
+    background: "#FB7185",
+    color: "#fff"
+}
+
+export const PrimaryOrange = {
+    background: "#F59E0B",
 }
 
 
@@ -188,9 +208,7 @@ export const MenuBar = styled.ul`
         line-height: 1.85;
         color: #fff;
 
-            
-
-
+        
         &:hover {
             transition: all .3s ease;
             opacity: 1;
@@ -256,7 +274,6 @@ export const UserIcon = styled.img`
 
 
 export const UserName = styled.span`
-    color: #334;
     font-size: 14px;
     text-align: left;
     font-weight: 600;
@@ -265,7 +282,7 @@ export const UserName = styled.span`
     .team {
         display: inline-block;
         font-size: 10px;
-        color:#717375;
+        color:#6B7280;
     }
 
     &:hover { text-decoration:underline; cursor: pointer; }
@@ -282,8 +299,9 @@ export const PageTitle = styled.h2`
 `;
 
 export const EditButton = styled(BasicButton)`
-    width: 110px;
+    width: 100px;
     margin:0 0 0 auto;
+    border-radius: 10px;
 `;
 
 /* ----------------------
@@ -322,7 +340,6 @@ export const PagePrimaryText = styled.p`
     line-height: 1.85;
     letter-spacing: 0.02em;
     font-weight: 600;
-    color: #333;
     margin: 0 auto 17px;
 `;
 
@@ -337,7 +354,7 @@ export const PagePrimaryContent = styled.p`
 
     span {
         font-size:14px;
-        color: #717375;
+        color: #6B7280;
         padding-right: 15px;
     }
 `;
@@ -382,13 +399,13 @@ export const UserInner = styled.div`
     .il_team {
         display: inline-block;
         font-size: 10px;
-        color:#717375;
+        color:#6B7280;
         padding: 0;
     }
     .il_intro {
         display: inline-block;
         font-size: 10px;
-        color:#717375;
+        color:#6B7280;
         padding: 0;
     }
 `;
@@ -407,7 +424,6 @@ export const ChatUserList = styled(PageInnerWrapper)`
 
 export const ChatUserListContent = styled.div`
     padding: 0 10px;
-    color: #334;
     font-size: 14px;
     text-align: left;
     font-weight: 600;
@@ -453,7 +469,6 @@ export const MessageInner = styled.div`
         background:#fff;
         padding:20px;
         text-align:left;
-        color:#333333;
         font-size:16px;
         font-weight:bold;
         border-radius:18px;
@@ -563,17 +578,22 @@ export const ShopContent = styled.div`
         letter-spacing: 0.02rem;
     }
     .shopDetail {
+        font-size: 14px;
         margin: 0 auto 20px;
         letter-spacing: 0.02rem;
     }
     .shopAdress , .shopAccess {
-        font-size: 14px;
+        font-size: 12px;
         margin: 0 auto 5px;
         letter-spacing: 0.02rem;
-        color: #717375;
+        color: #9CA3AF;
     }
     .shopAccess {
         margin: 0 auto 10px;
+    }
+    .shopBudget {
+        font-size: 16px;
+        font-weight:600;
     }
 `;
 
@@ -588,5 +608,5 @@ export const MiniButton = styled.a`
     font-weight: 600;
     border-radius: 8px;
     margin: 0 0 0 auto;
-    box-shadow: 0px 0px 10px -5px #777777;
+    box-shadow: 0px 0px 10px -5px #475569;
 `;

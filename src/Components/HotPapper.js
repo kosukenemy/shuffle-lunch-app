@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { ShopList, ShopThumbnail, ShopContent, MiniButton , GradationType1 } from '../Style/Style'
+import { ShopList, ShopThumbnail, ShopContent, MiniButton , PrimaryGray } from '../Style/Style'
 
 const HotPapper = () => {
     const [shopdata , setShopData] = useState([]);
@@ -91,11 +91,11 @@ const HotPapper = () => {
                             <p className="shopAccess">
                                 {shop.access}
                             </p>
-                            <p>
+                            <p className="shopBudget">
                                 {shop.budget.name}
                             </p>
                             <div className="button__inner">
-                                <MiniButton style={GradationType1} href={shop.urls.pc} target="_blank" rel="noopener noreferrer">詳細</MiniButton>
+                                <MiniButton style={PrimaryGray} href={shop.urls.pc} target="_blank" rel="noopener noreferrer">詳細</MiniButton>
                             </div>
                         </ShopContent>
 

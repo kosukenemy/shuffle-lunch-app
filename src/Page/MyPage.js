@@ -3,7 +3,7 @@ import { FetchUser } from '../App';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { db } from '../API/Firebase';
 import { storage } from '../API/Firebase'
-import { PageTitle, EditButton, PageInnerWrapper, PageContentInner, PagePrimaryText, PagePrimaryContent, MyPageUserIcon, PageColumn, PageRow, TitleIconProps, MyPageInputEdit } from '../Style/Style';
+import { PageTitle, EditButton, PageInnerWrapper, PageContentInner, PagePrimaryText, PagePrimaryContent, MyPageUserIcon, PageColumn, PageRow, TitleIconProps, MyPageInputEdit, PrimaryRed } from '../Style/Style';
 import PublishIcon from '@material-ui/icons/Publish';
 
 
@@ -29,16 +29,6 @@ const MyPage = () => {
 
     console.log(error , progress )
 
-    const patchData = {
-        "lunchState" : lunchJoin,
-        "lunchGenre" : lunchGenre,
-        "lunchTime" : lunchTime,
-        "talkTheme" : talkTheme,
-        "username" : editName,
-        "age" : editAge,
-        "team" : editTeam,
-        "introduction" : editIntroduction
-    }
 
 
 
@@ -199,8 +189,8 @@ const MyPage = () => {
             : 
 
                 <PageInnerWrapper>
-                    <div style={{display:'flex', width:' 260px', margin: '0 0 0 auto'}}>
-                        <EditButton onClick={handleEditSubmit} type="submit">保存</EditButton>
+                    <div style={{display:'flex', width:' 230px', margin: '0 0 0 auto'}}>
+                        <EditButton style={PrimaryRed} onClick={handleEditSubmit} type="submit">保存</EditButton>
                         <EditButton onClick={() => setContentEdit(!contentEdit)}>キャンセル</EditButton>
                     </div>
                     {fetchUserData.slice(0 ,1).map(((n , idx) => (

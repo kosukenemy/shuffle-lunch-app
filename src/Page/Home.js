@@ -4,8 +4,8 @@ import { FetchUser } from '../App';
 import { FetchUserlistData } from '../API/API';
 import HotPapper from '../Components/HotPapper'
 import { PageTitle, PageInnerWrapper, TitleIconProps , MiniButton } from '../Style/Style';
-import DashboardIcon from '@material-ui/icons/Dashboard';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 
 
@@ -29,20 +29,13 @@ const Home = () => {
     return (
         <div>
                 <PageTitle> 
-                    <><DashboardIcon style={TitleIconProps} /><span>ダッシュボード</span></>
+                    <><RestaurantIcon style={TitleIconProps} /><span>お店を探す</span></>
                 </PageTitle>
-
-                <PageInnerWrapper style={{margin:'0px auto 30px'}}>
-                    条件がマッチしたユーザーをランチに誘ってみよう！
-{/*                     <Link to="/chatlist">
-                        <MiniButton>チャット</MiniButton>
-                    </Link> */}
-                </PageInnerWrapper>
                 
                 <PageInnerWrapper>
                     
                     <PageTitle style={{fontSize:'20px'}}>  
-                        <><RestaurantIcon style={TitleIconProps} /><span>六本木周辺のお店</span></>
+                        <><LocationOnIcon style={TitleIconProps} /><span>六本木周辺</span></>
                     </PageTitle>
                     {/* ホットペッパー */}
                     <HotPapper />
