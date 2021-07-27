@@ -4,7 +4,7 @@ import { FetchUserlistData } from '../API/API';
 import { FetchUser } from '../../src/App'
 import { useParams } from 'react-router';
 import { db } from '../API/Firebase';
-import { PageTitle , UserIcon , TitleIconProps, ChatMessageContainer, ChatMessage, MessageInner, ChatInputInner, ChatInputField, ChatSubmitButton, GradationType1 } from '../Style/Style';
+import { PageTitle , UserIcon , TitleIconProps, ChatMessageContainer, ChatMessage, MessageInner, ChatInputInner, ChatInputField, ChatSubmitButton, PrimaryGray } from '../Style/Style';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 
 const Chat = () => {
@@ -138,7 +138,7 @@ const Chat = () => {
                 type="text" 
                 value={chatInput}
                 ></ChatInputField>
-                <ChatSubmitButton style={GradationType1} type="submit" onClick={handleSubmit}>送信</ChatSubmitButton>
+                <ChatSubmitButton style={PrimaryGray} type="submit" onClick={handleSubmit}>送信</ChatSubmitButton>
             </ChatInputInner>
         </div>
     )
