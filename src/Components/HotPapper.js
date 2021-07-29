@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ShopList, ShopThumbnail, ShopContent, MiniButton , PrimaryGray } from '../Style/Style'
 
 const HotPapper = () => {
+    // data
     const [shopdata , setShopData] = useState([]);
 
     useEffect(() => {
