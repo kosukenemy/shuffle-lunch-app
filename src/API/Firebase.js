@@ -6,7 +6,7 @@ import 'firebase/firestore';
 var firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
     authDomain:process.env.REACT_APP_FIREBASE_DOMAIN,
-    databaseURL: `https://${process.env.REACT_APP_FIREBASE_ID}.firebaseio.com`,
+    databaseURL: process.env.REACT_APP_FIREBASE_URL,
     projectId: process.env.REACT_APP_FIREBASE_ID,
     storageBucket: process.env.REACT_APP_FIREBASE_SB,
     messagingSenderId: process.env.REACT_APP_FIREBASE_MSI,
