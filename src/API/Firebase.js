@@ -10,7 +10,8 @@ var firebaseConfig = {
     projectId: process.env.REACT_APP_FIREBASE_ID,
     storageBucket: process.env.REACT_APP_FIREBASE_SB,
     messagingSenderId: process.env.REACT_APP_FIREBASE_MSI,
-    appId: process.env.REACT_APP_FIREBASE_APPID
+    appId: process.env.REACT_APP_FIREBASE_APPID,
+    databaseURL: `https://${process.env.REACT_APP_FIREBASE_ID}.firebaseio.com`,
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
