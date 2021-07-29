@@ -6,8 +6,11 @@ const HotPapper = () => {
     // data
     const [shopdata , setShopData] = useState([]);
 
+
+
     useEffect(() => {
-        axios.get(`/hotpepper/gourmet/v1/?key=${process.env.REACT_APP_HOTPEPPAR_APIKEY}&middle_area=Y045&count=100&format=json`,{
+
+        axios.get(`${process.env.REACT_APP_HOTPEPPAR_URL}`,{
             mode: 'cors',
             credentials: 'include' 
         })
