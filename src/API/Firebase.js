@@ -4,13 +4,13 @@ import 'firebase/firestore';
 
 
 var firebaseConfig = {
-    apiKey: "AIzaSyA2eRwtxI2bbsF3CRh45zLgCauK1mxQJyU",
-    authDomain: "lunch-app-backend.firebaseapp.com",
-    databaseURL: "https://lunch-app-backend-default-rtdb.firebaseio.com",
-    projectId: "lunch-app-backend",
-    storageBucket: "lunch-app-backend.appspot.com",
-    messagingSenderId: "1023254959511",
-    appId: "1:1023254959511:web:e24258a1387f864c31a0d2"
+    apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
+    authDomain:process.env.REACT_APP_FIREBASE_DOMAIN,
+    databaseURL: process.env.REACT_APP_FIREBASE_URL,
+    projectId: process.env.REACT_APP_FIREBASE_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_SB,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MSI,
+    appId: process.env.REACT_APP_FIREBASE_APPID,
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
