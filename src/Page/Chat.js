@@ -89,11 +89,11 @@ const Chat = () => {
     const chatMessage_timeSort = chatMessage.sort((a , b) => ( (a.createdAt < b.createdAt) ? -1 : 1));
 
 
-    const nowTime = dayjs();
+/*     const nowTime = dayjs();
     const nowTime_json = nowTime.format('YYYY/MM/DD/HH:mm')
     console.log( 
         "今",nowTime_json,
-    )
+    ) */
 
 
     return (
