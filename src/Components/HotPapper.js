@@ -11,8 +11,7 @@ const HotPapper = () => {
     useEffect(() => {
 
         axios.get(`${process.env.REACT_APP_HOTPEPPAR_URL}`,{
-            mode: 'cors',
-            credentials: 'include' 
+            mode: 'cors'
         })
         .then( res => {
             const datas = res.data;
