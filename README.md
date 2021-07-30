@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+## サービス名称
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+しゃふラン🍴 
 
-## Available Scripts
 
-In the project directory, you can run:
+## 公開URL(ベータ版)
 
-### `yarn start`
+https://shufflun-demo.netlify.app/
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## サービスイメージ
 
-### `yarn test`
+- トップページ
+<img width="1423" alt="shfflun-toppage" src="https://user-images.githubusercontent.com/61720779/127590301-c6c7c375-7435-4d85-acdb-69444db9a054.png">
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+- チャット画面
+<img width="1424" alt="shfflun-chatpage" src="https://user-images.githubusercontent.com/61720779/127590834-6dc4d537-5767-4e3a-ae13-be3c1877b004.png">
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## サービス概要
 
-### `yarn eject`
+社内利用を想定したシャッフルランチ促進のためのサービス。
+ログインしたユーザーのみ利用でき、それぞれのユーザーは、
+マイページから「ランチステータス」を変更することで、
+条件にあったユーザーとのチャットを開始できる。
+※ 1 on 1 でのチャットのみ。
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## テストログイン
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+ログイン画面の下部に、テストユーザーの情報を表示しています。
+不適切な情報の書き込みなどはご遠慮いただけますようにお願い申し上げます。
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## 利用技術
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+React 
+styled-components
+material-icon
+firebase
