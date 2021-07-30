@@ -8,7 +8,6 @@ module.exports = function(app) {
         createProxyMiddleware({
             target:`https://webservice.recruit.co.jp`, //this is your whole endpoint link
             changeOrigin: true,
-            secure: false,
         })
     );
     

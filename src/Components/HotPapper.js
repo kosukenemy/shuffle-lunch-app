@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+/* import React, { useState, useEffect } from 'react'; */
+/* import axios from 'axios'; */
+import { datas } from '../API/DemoAPI';
 import { ShopList, ShopThumbnail, ShopContent, MiniButton , PrimaryGray } from '../Style/Style'
 
 const HotPapper = () => {
-    // data
-    const [shopdata , setShopData] = useState([]);
+
+    // CROSエラーのため一旦APP内でJSONを読んでいる
+    // アクセス　console.log(datas[0].shop)
+
+    // endPointでの通信
+
+/*     const [shopdata , setShopData] = useState([]);
 
 
 
@@ -68,13 +75,13 @@ const HotPapper = () => {
             setShopData(modifiedData)
         })
     },[])
-
+ */
 
 
     return (
         <div>
             {
-                shopdata.map((shop , idx) => (
+                datas[0].shop.map((shop , idx) => (
                     <ShopList key={idx}>
                         
                         <ShopThumbnail>
