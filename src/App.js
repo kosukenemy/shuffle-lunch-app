@@ -61,7 +61,6 @@ const App = () => {
         setUserLogin(!userLogin);
         window.sessionStorage.setItem("user_login", "");
         setUser_id(window.sessionStorage.setItem("u_id" , ""));
-
     }
 
     useEffect(() => {
@@ -180,7 +179,9 @@ const App = () => {
                                                     </User>
                                                 </div>
                                             ))}
-                                            <button onClick={logOut}>ログアウト</button>
+                                            <Link to="/">
+                                                <button onClick={logOut}>ログアウト</button>
+                                            </Link>
                                         </div>
                                 </MainInNavbar>
 

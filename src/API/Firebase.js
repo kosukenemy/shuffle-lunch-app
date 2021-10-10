@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'; //必須
 import "firebase/storage";
 import 'firebase/firestore'; 
+import "firebase/auth";
 
 
 var firebaseConfig = {
