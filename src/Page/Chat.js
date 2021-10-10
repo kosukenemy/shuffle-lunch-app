@@ -1,17 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import { FetchUserlistData } from '../API/API';
-import { FetchUser } from '../../src/App'
 import { useParams } from 'react-router';
 import { db } from '../API/Firebase';
 import { PageTitle , UserIcon , TitleIconProps, ChatMessageContainer, ChatMessage, MessageInner, ChatInputInner, ChatInputField, ChatSubmitButton, PrimaryGray } from '../Style/Style';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 
-const Chat = () => {
-    
+const Chat = ({user}) => {
+    // console.log(user , "user props")
     let { id } = useParams();
-    const thisUser = useContext(FetchUser);
-    const [user , setUser] = useState([]);
+    const thisUser = user;
+    const [loginUser , setLoginUser] = useState([]);
     const [chatInput ,setChatInput] = useState("");
     // mounted Chat
     const [mountedChatData , setMountedChatData] = useState([]);
@@ -26,7 +25,7 @@ const Chat = () => {
     },[])
 
     // 自分のデータ
-    const matchUser = user.filter( u => u.id === id );
+    const matchUser = loginUser.filter( u => u.id === id );
     // 自分のデータの画像
     const myPic = thisUser.filter( u => u.profile_image ).map( u => u.profile_image );
     // トークするユーザーid
@@ -40,7 +39,7 @@ const Chat = () => {
 
     useEffect( () => {
         const FetchAPI = async() => {
-            setUser(await FetchUserlistData(id) );
+            setLoginUser(await FetchUserlistData(id) );
         }
         FetchAPI();
     },[id])

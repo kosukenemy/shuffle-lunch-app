@@ -1,13 +1,13 @@
-import React, { useContext ,useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FetchUser } from '../App';
 import { FetchUserlistData } from '../API/API';
 import { PageTitle, TitleIconProps, UserIcon, ChatUserList, ChatUserListContent, EditButton, PrimaryGray } from '../Style/Style';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 
 
-const ChatList = () => {
-    const thisUser = useContext(FetchUser);
+const ChatList = ({user}) => {
+    // console.log(user , "chatlist")
+    const thisUser = user;
     const [userStatus , setUserStatus] = useState([]);
     const myID = thisUser.map(u => u.id );
     const [joinStatusUsers , setJoinStatusUsers] = useState([]);

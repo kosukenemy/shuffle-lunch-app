@@ -1,5 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { FetchUser } from '../App';
+import React, { useState, useEffect } from 'react';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { db } from '../API/Firebase';
 import { storage } from '../API/Firebase'
@@ -7,10 +6,11 @@ import { PageTitle, EditButton, PageInnerWrapper, PageContentInner, PagePrimaryT
 import PublishIcon from '@material-ui/icons/Publish';
 
 
-const MyPage = () => {
+const MyPage = ({ user }) => {
 
+    // console.log(user , "props")
 
-    const thisUser = useContext(FetchUser);
+    const thisUser = user;
     const [fetchUserData , setFetchUserData] = useState([]);
     const [contentEdit , setContentEdit] = useState(false);
     const [lunchTime , setLunchTime] = useState("11:00-12:00");
@@ -27,7 +27,7 @@ const MyPage = () => {
     const [error, setError] = useState("");
     const [progress, setProgress] = useState(100);
 
-    console.log(error , progress )
+    // console.log(error , progress )
 
 
 

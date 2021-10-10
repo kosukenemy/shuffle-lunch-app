@@ -123,6 +123,7 @@ export const BasicButton = styled.button`
     display: block;
     padding: 10px 5px; 
     font-weight: 600;
+    color : #fff;
 
     &:hover {
         transition: all .3s ease-in-out;
